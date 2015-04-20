@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Thu Apr  2 11:36:01 2015 cristopher toozs-hobson
+** Last update Mon Apr 20 11:00:13 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -97,7 +97,7 @@ void		execute_function(char *ret)
   glo.pid = 0;
   glo.word_tab = my_str_tab(ret);
   path = find_var(glo.env, "PATH");
-  if (glo.ordtab[0] && glo.word_tab[0][0] == '/')
+  if (glo.word_tab[0] && glo.word_tab[0][0] == '/')
     {
       my_putstr_err("Unknown command\n");
       free_tab(glo.word_tab);
