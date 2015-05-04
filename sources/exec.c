@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Mon Apr 20 11:00:13 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:18:06 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -29,32 +29,6 @@ char		**add_slash(char **tab)
   return (tab);
 }
 
-char		*check_access(char **tab, char *function)
-{
-  char		*ret;
-  int		i;
-  char		*tmp;
-
-  i = 1;
-  while (tab[i] != NULL)
-    {
-      tmp = tab[i];
-      if (access((ret = my_strcat(tab[i], function)), F_OK) == 0)
-      	{
-      	  free(tmp);
-      	  while (tab[++i] != NULL)
-      	    free(tab[i]);
-      	  free(tab);
-      	  return (ret);
-      	}
-      free(ret);
-      free(tab[i]);
-      i++;
-    }
-  free(tab);
-  return (NULL);
-}
-
 char		*find_function(char *path, char *function)
 {
   char		**tab;
@@ -65,47 +39,47 @@ char		*find_function(char *path, char *function)
   free(tab[0]);
   if (function == NULL)
     return (function);
-  if ((ret = check_access(tab, function)) != NULL)
-    return (ret);
-  else
-    return (function);
+  ret = check_access(tab, function);
+  return (ret);
 }
 
-void		execute(char *path, char *ret, int i)
+int		execute(char *path, char *ret, int i, t_main *m)
 {
   char		*save;
+  int		check;
 
-  if ((my_strcmp(glo.word_tab[0], g_bin[i].str)) == 0)
-    g_bin[i].ptr();
-  else if (path != NULL &&
-	   (save = find_function(path, glo.word_tab[0]))
-	   != glo.word_tab[0])
+  if ((my_strcmp(m->word_tab[0], g_bin[i].str)) == 0)
     {
-      glo.word_tab[0] = save;
-      execute_fork(glo.word_tab, glo.env);
+      check = g_bin[i].ptr(m);
+      return (check);
+    }
+  else if (path != NULL && (save = find_function(path, m->word_tab[0])))
+    {
+      m->word_tab[0] = save;
+      check = execute_fork(m->word_tab, m->env, m);
+      return (check);
     }
   else if (ret[0] != '\0' && g_bin[i].str == NULL)
-    my_putstr_err("Unknown command\n");
+    {
+      my_putstr_err("Unknown command\n");
+      return (1);
+    }
+  return (0);
 }
 
-void		execute_function(char *ret)
+int		execute_function(char *ret, t_main *m)
 {
   int		i;
   char		*path;
+  int		check;
 
   i = 0;
-  glo.pid = 0;
-  glo.word_tab = my_str_tab(ret);
-  path = find_var(glo.env, "PATH");
-  if (glo.word_tab[0] && glo.word_tab[0][0] == '/')
-    {
-      my_putstr_err("Unknown command\n");
-      free_tab(glo.word_tab);
-      return ;
-    }
+  m->word_tab = my_str_tab(ret);
+  path = find_var(m->env, "PATH");
   while (ret[0] != '\0' && g_bin[i].str != NULL
-         && (my_strcmp(glo.word_tab[0], g_bin[i].str) != 0))
+         && (my_strcmp(m->word_tab[0], g_bin[i].str) != 0))
     i++;
-  execute(path, ret, i);
-  free_tab(glo.word_tab);
+  check = execute(path, ret, i, m);
+  free_tab(m->word_tab);
+  return (check);
 }

@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Oct  8 20:20:31 2014 cristopher toozs-hobson
-** Last update Wed Mar 25 10:01:50 2015 cristopher toozs-hobson
+** Last update Mon Apr 20 16:21:46 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -24,7 +24,7 @@ char		*new_str(char *first, char *second)
   i = 0;
   n = 0;
   if ((new = malloc(sizeof(char) * (size_one + size_two + 1))) == NULL)
-    exit(0);
+    return (NULL);
   while (first[i] != '\0')
     {
       new[i] = first[i];

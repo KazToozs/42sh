@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Wed Mar 25 19:22:43 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:51:12 2015 cristopher toozs-hobson
 */
 
 #ifndef SHELL_H_
@@ -31,6 +31,12 @@ typedef struct	s_tree
   struct s_tree	*right;
 }		t_tree;
 
+typedef struct	s_stat
+{
+  char		*mess;
+  int		sig;
+}		t_stat;
+
 typedef struct	s_left
 {
   int		in_cpy;
@@ -40,60 +46,92 @@ typedef struct	s_left
   char		**ret;
 }		t_left;
 
-typedef struct	s_glo
+typedef struct	s_pipe
+{
+  int		in_cpy;
+  int		out_cpy;
+  int		pipefd[2];
+  int		check;
+}		t_pipe;
+
+typedef struct	s_main
 {
   struct s_env	*env;
   struct s_tree	*tree;
+  int		ret;
+  int		sig;
+  char		**word_tab;
+}		t_main;
+
+typedef struct	s_exec
+{
+  int		(*ptr)(t_tree *root, t_main *m);
+  char		op;
+}		t_exec;
+
+typedef struct	s_glo
+{
   pid_t		pid;
   int		x;
-  char		**word_tab;
 }		g_glo;
 
 extern g_glo	glo;
 
-void		make_tree(t_tree **root, char *ret);
+void		show_tree(t_tree *tree, int nb);//
+int		my_shell(char *ret, t_main *m);
+int		make_tree(t_tree **root, char *ret);
 void		manage_error(char *str);
-void		manage_signal();
-void		make_env(char **env);
-void		execute_function(char *ret);
-void		execute_fork(char **word_tab, t_env *env);
+void		status_error(int status);
+int		status_check(int status, t_main *m);
+int		manage_signal();
+int		make_env(char **env, t_main *m);
+int		execute_function(char *ret, t_main *m);
+int		execute_fork(char **word_tab, t_env *env, t_main *m);
 char		*find_var(t_env *env, char *var);
-void		my_put_in_list_end(t_env **list, char *data, t_env **mark);
+int		my_put_in_list_end(t_env **list, char *data, t_env **mark);
 void		remove_node(t_env **node, t_env **mark);
 void		free_tab(char **tab);
-void		launch_tree(t_tree *root);
+int		launch_tree(t_tree *root, t_main *m);
 char		**my_realloc_tab(char **str, int size);
 void		free_tree(t_tree *root);
 void		perform_check(char *ret, int *i, int *check, t_tree **root);
 int		check_op(char *ret);
 int		quotes(char c, int tru);
+char		*check_access(char **tab, char *function);
 
 /*
 ** Built-ins
 */
 
-int		cd();
-int		cd_tilde();
-int		cd_minus();
-int		cd_ddot();
-int		cd_home();
-char		*remove_slash(char c);
-int		escape();
-void            add_env(char *var, char *value);
-int		remove_env_var();
-int		my_setenv();
-int		display_env();
-int		my_echo();
+int		cd(t_main *m);
+int		cd_tilde(t_main *m);
+int		cd_minus(t_main *m);
+int		cd_ddot(t_main *m);
+int		cd_home(t_main *m);
+char		*remove_slash(char c, t_main *m);
+int		escape(t_main *m);
+void		add_env(char *var, char *value, t_main *m);
+int		remove_env_var(t_main *m);
+int		my_setenv(t_main *m);
+void		my_show_list(t_env *list);
+int		display_env(t_main *m);
+int		my_echo(t_main *m);
 
 /*
 ** Operations
 */
 
-void		pipe_op(t_tree *root);
-void		semi_colon(t_tree *root);
-void		right_op(t_tree *root);
-void		double_right(t_tree *root);
-void		double_left_fork(t_tree *root);
-void		left_op(t_tree *root);
+int		pipe_op(t_tree *root, t_main *m);
+int		or_op(t_tree *root, t_main *m);
+int		and_op(t_tree *root, t_main *m);
+int		semi_colon(t_tree *root, t_main *m);
+int		right_op_check(t_tree *root, t_main *m);
+int		right_op(t_tree *root, int type, t_main *m);
+int		double_left_fork(t_tree *root, t_main *m);
+int		left_op(t_tree *root, t_main *m);
+int             or_check(char *ret, int *n);
+int             redir_check(char *ret, int *n, char dir);
+int		and_check(char *ret, int *n);
+void		redir_set(int *check, t_tree **root, int *i, char set);
 
 #endif

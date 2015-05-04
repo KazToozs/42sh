@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Jan 20 20:05:19 2015 cristopher toozs-hobson
-** Last update Tue Mar  3 11:01:11 2015 cristopher toozs-hobson
+** Last update Fri May  1 15:48:04 2015 cristopher toozs-hobson
 */
 
 #ifndef BIN_H_
@@ -13,7 +13,7 @@
 
 typedef struct	s_bins
 {
-  int		(*ptr)();
+  int		(*ptr)(t_main *m);
   char		*str;
 }		t_bins;
 

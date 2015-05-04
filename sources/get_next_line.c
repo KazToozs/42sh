@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Nov 19 11:00:34 2014 cristopher toozs-hobson
-** Last update Sat Feb 28 22:56:42 2015 cristopher toozs-hobson
+** Last update Fri May  1 17:06:48 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ char		get_char(int fd)
     {
       i = 0;
       buffer_clean(buffer, BUFF_SIZE + 1, 0);
-      if  (read(fd, buffer, BUFF_SIZE) <= 0)
+      if (read(fd, buffer, BUFF_SIZE) <= 0)
 	return (-1);
     }
   return (buffer[i++]);
@@ -72,7 +72,9 @@ char		*get_next_line(const int fd)
   while ((c = get_char(fd)) != -1 && c != '\0' && c != '\n')
     {
       if (i >= (j * BUFF_SIZE))
-	buffer = my_realloc(buffer, sizeof(char) * ((++j * BUFF_SIZE) + 1));
+	if ((buffer = my_realloc(buffer, sizeof(char)
+				 * ((++j * BUFF_SIZE) + 1))) == NULL)
+	  return (NULL);
       buffer[i++] = c;
     }
   if (c == -1 && buffer[0] == '\0')

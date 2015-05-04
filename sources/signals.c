@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 21:44:08 2015 cristopher toozs-hobson
-** Last update Wed Mar  4 14:16:57 2015 cristopher toozs-hobson
+** Last update Fri May  1 11:35:12 2015 cristopher toozs-hobson
 */
 
 #include <signal.h>
@@ -14,38 +14,37 @@
 #include "minishell.h"
 #include "my.h"
 
-void            send_sig(int non)
+void		send_sig(int non)
 {
   (void)non;
-  if (glo.pid != 0 && glo.x == 1)
-    {
-      if (kill(glo.pid, SIGINT) == -1)
-        exit (1);
-      my_putchar('\n');
-    }
-  else if (glo.pid == 0 && glo.x == 2)
-    exit(0);
-  else
+  if (glo.pid == 0 && glo.x == 2)
+    return ;
+  else if (glo.pid == -2)
     {
       my_putstr_err("\n$>");
     }
 }
 
-void            manage_error(char *str)
+void		handler(int sig)
 {
-  int           i;
-
-  i = 0;
-  while (str[i] != '\0')
+  if (sig == SIGPIPE)
     {
-      write(2, &str[i], 1);
-      i++;
+      if (glo.pid != 0)
+	my_putstr_err("Write error: broken pipe\n");
     }
-  exit(1);
 }
 
-void            manage_signal()
+int		manage_signal()
 {
   if (signal(SIGINT, &send_sig) == SIG_ERR)
-    manage_error("Signal error\n");
+    {
+      my_putstr_err("Signal error\n");
+      return (1);
+    }
+  else if (signal(SIGPIPE, &handler) == SIG_ERR)
+    {
+      my_putstr_err("Signal error\n");
+      return (1);
+    }
+  return (0);
 }

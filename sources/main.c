@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Wed Mar 25 19:20:30 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:35:02 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -15,51 +15,48 @@
 g_glo		glo;
 extern char	**environ;
 
-int		check_quotes(char *str)
+int		start_up(t_main *m)
 {
-  int		i;
-  int		odd;
-
-  i = 0;
-  odd = 0;
-  while (str[i] != '\0')
-    {
-      if (str[i] == '"' && odd == 0)
-	odd = 1;
-      else if (str[i] == '"' && odd == 1)
-	odd = 0;
-      i++;
-    }
-  return (odd);
+  my_putstr("$>");
+  glo.x = 1;
+  glo.pid = -2;
+  m->ret = 0;
+  if (make_env(environ, m) == 1)
+    return (1);
+  if (manage_signal() == 1)
+    return (1);
+  return (0);
 }
 
-int		check_first(char *ret)
+void		free_env(t_env *env)
 {
-  if (ret[0] == '>' || ret[0] == '<' || ret[0] == '|' || ret[0] == ';')
-    return (1);
-  else
-    return (0);
+  t_env		*tmp;
+
+  tmp = env;
+  while (env != NULL)
+    {
+      env = env->next;
+      free(tmp);
+      tmp = env;
+    }
 }
 
 int		main()
 {
   char		*ret;
+  int		check;
+  t_main	m;
 
-  my_putstr("$>");
-  glo.x = 1;
-  make_env(environ);
-  manage_signal();
+  if (start_up(&m) == 1)
+    return (1);
   while ((ret = get_next_line(0)) != NULL)
     {
-      if (check_quotes(ret) == 0 && check_first(ret) == 0)
+      if ((check = my_shell(ret, &m)) != -3)
 	{
-	  glo.tree = NULL;
-	  make_tree(&glo.tree, ret);
-	  launch_tree(glo.tree);
-	  free_tree(glo.tree);
+	  free(ret);
+	  free_env(m.env);
+	  return (check);
 	}
-      else
-	my_putstr_err("Invalid syntax\n");
       my_putstr("$>");
       free(ret);
     }

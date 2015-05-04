@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Nov  3 10:09:14 2014 cristopher toozs-hobson
-** Last update Sat Feb 28 23:06:37 2015 cristopher toozs-hobson
+** Last update Fri May  1 17:17:26 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -20,8 +20,8 @@ int		count_words(char *str)
   cpt = 0;
   while (str[i] != '\0')
     {
-      if  (str[i] >= 33 && str[i] <= 126
-	   && str[i] != ':' && str[i] != '=' && str[i] != '"')
+      if (str[i] >= 33 && str[i] <= 126
+	  && str[i] != ':' && str[i] != '=' && str[i] != '"')
 	{
 	  cpt++;
 	  while ((str[i] && str[i] >= 33 && str[i] <= 126)
@@ -61,15 +61,15 @@ char		**my_str_tab(char *str)
   size = 0;
   words = count_words(str);
   if ((tab = malloc(sizeof(char *) * (words + 1))) == NULL)
-    exit(1);
+    return (NULL);
   while (str[i] && words > 0)
     {
       if (str[i] >= 33 && str[i] <= 126 && str[i] != ':'
 	  && str[i] != '=' && str[i] != '"')
 	{
-	  tab[size] = my_strdup(str + i);
-	  tab[size] [count_chars(str, &i)] = '\0';
-	  size++;
+	  if ((tab[size] = my_strdup(str + i)) == NULL)
+	    return (NULL);
+	  tab[size++] [count_chars(str, &i)] = '\0';
 	  words = words - 1;
 	}
       else

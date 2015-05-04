@@ -5,46 +5,46 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 18:55:08 2015 cristopher toozs-hobson
-** Last update Wed Mar 25 19:23:13 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:26:37 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
 
-void		execute_tree(t_tree *root, char op)
-{
-  if (op == ';')
-    semi_colon(root);
-  else if (op == '|')
-    pipe_op(root);
-  else if (op == '>')
-    right_op(root);
-  else if (op == '<')
-    left_op(root);
-  else if (op == '1')
-    double_right(root);
-  else if (op == '0')
-    double_left_fork(root);
-}
+t_exec		exec[]=
+  {
+    {&semi_colon, ';'},
+    {&or_op, 'r'},
+    {&and_op, '&'},
+    {&pipe_op, '|'},
+    {&right_op_check, '>'},
+    {&left_op, '<'},
+    {&right_op_check, '1'},
+    {&double_left_fork, '0'},
+    {NULL, 0}
+  };
 
-void		launch_tree(t_tree *root)
+int		launch_tree(t_tree *root, t_main *m)
 {
-  if (root->op == ';')
-    execute_tree(root, ';');
-  else if (root->op == '>')
-    execute_tree(root, '>');
-  else if (root->op == '1')
-    execute_tree(root, '1');
-  else if (root->op == '|')
-    execute_tree(root, '|');
+  int		ret;
+  int		i;
+
+  i = 0;
+  ret = 0;
+  while (exec[i].ptr != NULL && root->op != exec[i].op)
+    i++;
+  if (exec[i].ptr != NULL)
+    ret = exec[i].ptr(root, m);
   else
     {
       if ((root->left != NULL) && (root->left->op != '\0'))
-        launch_tree(root->left);
+        ret = launch_tree(root->left, m);
       if ((root->right != NULL) && (root->right->op != '\0'))
-        launch_tree(root->right);
-      if ((root->left != NULL) && (root->right != NULL))
-        execute_tree(root, root->op);
+        ret = launch_tree(root->right, m);
       else
-        execute_function(root->exp);
+	{
+	  ret = execute_function(root->exp, m);
+	  return (ret);
+	}
     }
+  return (ret);
 }

@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Nov  5 17:02:51 2014 cristopher toozs-hobson
-** Last update Sat Feb 28 17:44:40 2015 cristopher toozs-hobson
+** Last update Mon Apr 20 16:10:23 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -16,7 +16,7 @@ char	*my_strdup(char *str)
   char	*dest;
 
   if ((dest = malloc(sizeof(char) * my_strlen(str) + 1)) == NULL)
-    exit(0);
+    return (NULL);
   dest = my_strcpy(dest, str);
   dest[my_strlen(str)] = 0;
   return (dest);

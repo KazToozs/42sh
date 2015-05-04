@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 11 17:26:37 2015 cristopher toozs-hobson
-** Last update Sat Feb 28 23:01:24 2015 cristopher toozs-hobson
+** Last update Sat Apr 25 15:02:29 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -18,7 +18,7 @@ char		*my_realloc(char *buffer, int size)
   char		*tmp;
 
   if ((tmp = malloc(size)) == NULL)
-    exit(0);
+    return (NULL);
   i = 0;
   while (buffer[i] != '\0')
     {
@@ -37,7 +37,7 @@ char		**my_realloc_tab(char **buffer, int size)
   char		**tmp;
 
   if ((tmp = malloc(sizeof(char *) * (size + 1))) == NULL)
-    exit(0);
+    return (NULL);
   i = 0;
   while (i < (size - 1))
     {

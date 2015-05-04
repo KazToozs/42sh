@@ -5,29 +5,29 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Oct  8 15:04:55 2014 cristopher toozs-hobson
-** Last update Wed Jan 21 11:26:49 2015 cristopher toozs-hobson
+** Last update Sun Apr 12 15:28:04 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
 
-int	my_strcmp(char *s1, char *s2)
+int	my_strcmp(char *first, char *second)
 {
   int	i;
 
   i = 0;
-  if (s1 != NULL && s2 != NULL)
+  if (first != NULL && second != NULL)
     {
-      while (s1[i])
+      while (first[i])
 	{
-	  if (s1[i] < s2[i])
+	  if (first[i] < second[i])
 	    return (-1);
-	  if (s1[i] > s2[i])
+	  if (first[i] > second[i])
 	    return (1);
 	  i++;
 	}
-      if (s1[i] < s2[i])
+      if (first[i] < second[i])
 	return (-1);
-      if (s1[i] > s2[i])
+      if (first[i] > second[i])
 	return (1);
       return (0);
     }

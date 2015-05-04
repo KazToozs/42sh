@@ -5,20 +5,20 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Feb 16 11:32:54 2015 cristopher toozs-hobson
-** Last update Sat Feb 28 22:50:07 2015 cristopher toozs-hobson
+** Last update Fri May  1 15:41:52 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
 #include "minishell.h"
 #include "my.h"
 
-void		my_put_in_list_end(t_env **list, char *data, t_env **mark)
+int		my_put_in_list_end(t_env **list, char *data, t_env **mark)
 {
   t_env		*block;
   t_env		*tmp;
 
   if ((block = malloc(sizeof(*block))) == NULL)
-    exit (1);
+    return (1);
   block->var = data;
   block->next = NULL;
   if ((*list) == NULL)
@@ -35,6 +35,7 @@ void		my_put_in_list_end(t_env **list, char *data, t_env **mark)
       (*list)->next->prev = (*list);
       (*list) = tmp;
     }
+  return (0);
 }
 
 void		remove_node(t_env **node, t_env **mark)
@@ -69,15 +70,17 @@ char		*find_var(t_env *env, char *var)
   return (NULL);
 }
 
-void		make_env(char **env)
+int		make_env(char **env, t_main *m)
 {
   int		i;
 
   i = 0;
-  glo.env = NULL;
+  m->env = NULL;
   while (env[i] != NULL)
     {
-      my_put_in_list_end(&glo.env, env[i], &glo.env);
+      if (my_put_in_list_end(&m->env, env[i], &m->env) == 1)
+	return (1);
       i++;
     }
+  return (0);
 }

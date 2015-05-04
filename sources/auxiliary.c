@@ -5,10 +5,28 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Mar  3 11:01:56 2015 cristopher toozs-hobson
-** Last update Tue Mar  3 11:38:45 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:51:25 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
+#include "minishell.h"
+#include "my.h"
+
+void		my_show_list(t_env *list)
+{
+  t_env		*tmp;
+
+  tmp = list;
+  while (tmp != NULL)
+    {
+      if (tmp->var != NULL)
+        {
+          my_putstr(tmp->var);
+          my_putchar('\n');
+        }
+      tmp = tmp->next;
+    }
+}
 
 void		free_tab(char **tab)
 {

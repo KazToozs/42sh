@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:00:11 2015 cristopher toozs-hobson
-** Last update Sat Feb 28 23:38:18 2015 cristopher toozs-hobson
+** Last update Fri May  1 16:34:04 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "my.h"
 #include "minishell.h"
 
-void		dbl_left_read(t_left *l)
+int		dbl_left_read(t_left *l)
 {
   int		i;
 
@@ -24,18 +24,20 @@ void		dbl_left_read(t_left *l)
     {
       l->tab[i] = NULL;
       i++;
-      l->tab = my_realloc_tab(l->tab, i);
+      if ((l->tab = my_realloc_tab(l->tab, i)) == NULL)
+	return (1);
       my_putstr_err("> ");
     }
   if (l->tab[i - 1] == NULL)
-    exit(0);
+    return (0);
   l->tab[i] = NULL;
   if (pipe(l->pipefd) == -1)
-    exit(1);
+    return (1);
   if (dup2(l->pipefd[WRITE_END], WRITE_END) == -1)
-    exit(1);
+    return (1);
   if (dup2(l->pipefd[READ_END], READ_END) == -1)
-    exit(1);
+    return (1);
+  return (0);
 }
 
 void		dbl_left_cmp(t_left *l)
@@ -52,61 +54,82 @@ void		dbl_left_cmp(t_left *l)
   free_tab(l->ret);
 }
 
-void		dbl_left_close(t_left *l, t_tree *root)
+int		dbl_left_close(t_left *l, t_tree *root, t_main *m)
 {
+  int		ret;
+
   if (close(l->pipefd[WRITE_END]) == -1)
-    exit(1);
+    return (1);
   if (dup2(l->out_cpy, WRITE_END) == -1)
-    exit(1);
+    return (1);
   if (root->left->exp == NULL)
-    launch_tree(root->left);
+    {
+      ret = launch_tree(root->left, m);
+      if (close(l->pipefd[READ_END]) == -1)
+	return (1);
+      if (dup2(l->in_cpy, READ_END) == -1)
+	return (1);
+      return (ret);
+    }
   else
-    execute_function(root->left->exp);
-  if (close(l->pipefd[READ_END]) == -1)
-    exit(1);
-  if (dup2(l->in_cpy, READ_END) == -1)
-    exit(1);
+    {
+      ret = execute_function(root->left->exp, m);
+      if (close(l->pipefd[READ_END]) == -1)
+	return (1);
+      if (dup2(l->in_cpy, READ_END) == -1)
+	return (1);
+      return (ret);
+    }
+  return (0);
 }
 
-void		double_left(t_tree *root)
+int		double_left(t_tree *root, t_main *m)
 {
   t_left	l;
+  int		ret;
 
   l.in_cpy = dup(0);
   l.out_cpy = dup(1);
   if (l.in_cpy == -1 || l.out_cpy == -1)
-    exit(1);
+    return (1);
   if ((l.tab = malloc(sizeof(char *) * 2)) == NULL)
-    exit(1);
+    return (1);
   l.tab[0] = NULL;
   l.ret = my_str_tab(root->right->exp);
   if (!l.ret[0])
     {
       my_putstr_err("Missing right operand\n");
-      return ;
+      return (1);
     }
   my_putstr_err("> ");
-  dbl_left_read(&l);
+  ret = dbl_left_read(&l);
   dbl_left_cmp(&l);
-  dbl_left_close(&l, root);
+  ret = dbl_left_close(&l, root, m);
+  return (ret);
 }
 
-void		double_left_fork(t_tree *root)
+int		double_left_fork(t_tree *root, t_main *m)
 {
   int		status;
+  int		ret;
+  pid_t		pid;
 
-  if ((glo.pid = fork()) == - 1)
-    manage_error("Fork failed\n");
-  else if (glo.pid == 0)
+  if ((pid = fork()) == - 1)
+    return (1);
+  else if (pid == 0)
     {
       glo.x = 2;
-      double_left(root);
-      exit(0);
+      if ((ret = double_left(root, m)) == 1)
+	{
+	  return (ret);
+	}
+      return (1);
     }
   else
     {
-      if (waitpid(glo.pid, &status, 0) == -1)
-        exit(1);
-      glo.pid = 0;
+      if (waitpid(pid, &status, 0) == -1)
+        return (1);
+      pid = 0;
     }
+  return (0);
 }
