@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  1 11:50:46 2015 cristopher toozs-hobson
-** Last update Fri May  1 16:19:29 2015 cristopher toozs-hobson
+** Last update Wed May  6 17:02:43 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -31,7 +31,7 @@ int		check_quotes(char *str)
 
 int		check_first(char *ret)
 {
-  if (ret[0] == '>' || ret[0] == '<' || ret[0] == '|' || ret[0] == ';'
+  if (ret[0] == '|' || ret[0] == ';'
       || ret[0] == '&')
     return (1);
   else
@@ -43,21 +43,18 @@ int		interpret_command(char *ret, t_main *m)
   int		check;
 
   m->tree = NULL;
-  if (make_tree(&m->tree, ret) == 1)
-    {
-      my_putstr_err("Malloc error in tree creation\n");
-      return (1);
-    }
   if (ret[0] != '\0')
     {
+      if (make_tree(&m->tree, ret) == 1)
+	return (1);
       show_tree(m->tree, 0);
       check = launch_tree(m->tree, m);
       if (glo.pid != 0)
-        glo.pid = -1;
+	glo.pid = -1;
       free_tree(m->tree);
       return (check);
     }
-  return (1);
+  return (0);
 }
 
 int		my_shell(char *ret, t_main *m)

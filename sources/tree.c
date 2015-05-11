@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Feb 17 09:52:57 2015 cristopher toozs-hobson
-** Last update Mon Apr 27 14:05:18 2015 cristopher toozs-hobson
+** Last update Fri May  8 13:05:40 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -47,6 +47,7 @@ void		free_tree(t_tree *root)
     free(root);
 }
 
+#include <stdio.h>
 void            show_tree(t_tree *tree, int nb)
 {
   //Michel's read tree 
@@ -57,31 +58,29 @@ void            show_tree(t_tree *tree, int nb)
   tmp = nb;
   while (tmp > 0)
     {
-      printf("\t");
+      fprintf(stderr, "\t");
       tmp = tmp - 1;
     }
   if (tree->op != 0)
-    printf("op[%c]", tree->op);
+    fprintf(stderr, "op[%c]", tree->op);
   if (tree->op == 0)
-    printf("exp[%s]", tree->exp);
-  printf("\n");
+    fprintf(stderr, "exp[%s]", tree->exp);
+  fprintf(stderr, "\n");
   if (tree->right)
     show_tree(tree->right, nb + 1);
 }
 
-int		make_tree(t_tree **root, char *ret)
+int		set_nodes(t_tree **root, char *ret)
 {
   int		i;
-  int		check;
   int		fi;
+  int		check;
 
-  if (*root == NULL)
-    if ((*root = make_node(ret)) == NULL)
-      return (1);
   i = my_strlen(ret) - 1;
   if ((fi = check_op(ret)) == 1)
     {
-      perform_check(ret, &i, &check, root);
+      if (perform_check(ret, &i, &check, root) == 1)
+	return (1);
       (*root)->exp = NULL;
       ret[i] = '\0';
       if (make_tree(&(*root)->left, ret) == 1)
@@ -96,4 +95,15 @@ int		make_tree(t_tree **root, char *ret)
   else if (fi == 0)
     (*root)->exp = ret;
   return (0);
+}
+
+int		make_tree(t_tree **root, char *ret)
+{
+  if (*root == NULL)
+    if ((*root = make_node(ret)) == NULL)
+      {
+	my_putstr_err("Malloc error in tree creation\n");
+	return (1);
+      }
+  return (set_nodes(root, ret));
 }

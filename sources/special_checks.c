@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sun Apr 26 15:30:02 2015 cristopher toozs-hobson
-** Last update Mon Apr 27 13:35:45 2015 cristopher toozs-hobson
+** Last update Fri May  8 12:24:30 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -31,15 +31,20 @@ int		and_check(char *ret, int *n)
   return (0);
 }
 
-void		redir_set(int *check, t_tree **root, int *i, char set)
+void		redir_set(int *check, t_tree **root, int *i, char *ret)
 {
   if (*check == -1)
-    (*root)->op = set;
+    {
+      if (ret[*i] == '>')
+	(*root)->op = '1';
+      else if (ret[*i] == '<')
+	(*root)->op = '0';
+    }
   else
     *i = *check;
 }
 
-int		redir_check(char *ret, int *n, char dir)
+int		redir_check(char *ret, int *n)
 {
   int		i;
   int		quote;
@@ -49,9 +54,10 @@ int		redir_check(char *ret, int *n, char dir)
   while (i >= 0)
     {
       quote = quotes(ret[i], quote);
-      if (ret[i] == dir && quote == 0)
+      if ((ret[i] == '<' || ret[i] == '>') && quote == 0)
         {
-          if (ret[i] == dir && ret[i - 1] == dir)
+          if ((i - 1 >= 0) && ((ret[i] == '<' && ret[i - 1] == '<')
+			       || (ret[i] == '>' && ret[i - 1] == '>')))
             {
               *n = i - 1;
               return (-1);
@@ -60,7 +66,7 @@ int		redir_check(char *ret, int *n, char dir)
         }
       i--;
     }
-  return (0);
+  return (-2);
 }
 
 int		or_check(char *ret, int *n)

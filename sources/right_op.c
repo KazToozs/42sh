@@ -5,11 +5,12 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Apr 25 16:09:43 2015 cristopher toozs-hobson
-** Last update Fri May  1 16:31:16 2015 cristopher toozs-hobson
+** Last update Fri May  8 13:58:03 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <stdlib.h>
 #include <fcntl.h>
 #include "minishell.h"
 #include "my.h"
@@ -30,8 +31,9 @@ char		**right_errors(t_tree *root)
 {
   char		**tab;
 
+  tab = NULL;
   if (root->right->exp)
-    tab = my_str_tab(root->right->exp);
+    set_file_word(root, &tab);
   else
     {
       my_putstr_err("Invalid syntax\n");
@@ -69,28 +71,43 @@ int		right_prep(t_tree *root, int type)
   return (0);
 }
 
-int		right_op(t_tree *root, int type, t_main *m)
+int		execute_right(t_tree *root, t_main *m, char **check, int out)
 {
-  int		stdout_cpy;
   int		ret;
 
-  if ((stdout_cpy = dup(1)) == -1)
-    return (1);
-  if (right_prep(root, type) == 1)
-    return (1);
-  if (root->left->exp == NULL)
+  if ((!root->left->exp && root->left->op)
+      || (root->left->exp && check && !check[0]))
     {
-      ret = launch_tree(root->left, m);
-      if (dup2(stdout_cpy, 1) == -1)
+      free_tab(check);
+      if (!root->left->op)
+	ret = execute_function(root->right->exp, m);
+      else
+	ret = launch_tree(root->left, m);
+      if (dup2(out, 1) == -1)
         return (1);
       return (ret);
     }
   else
     {
       ret = execute_function(root->left->exp, m);
-      if (dup2(stdout_cpy, 1) == -1)
+      if (dup2(out, 1) == -1)
         return (1);
       return (ret);
     }
   return (0);
+}
+
+int		right_op(t_tree *root, int type, t_main *m)
+{
+  int		stdout_cpy;
+  char		**check;
+
+  check = NULL;
+  if ((stdout_cpy = dup(1)) == -1)
+    return (1);
+  if (right_prep(root, type) == 1)
+    return (1);
+  if (root->left->exp != NULL)
+    check = my_str_tab(root->left->exp);
+  return (execute_right(root, m, check, stdout_cpy));
 }

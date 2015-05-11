@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 22:09:42 2015 cristopher toozs-hobson
-** Last update Fri May  1 17:17:50 2015 cristopher toozs-hobson
+** Last update Fri May  8 12:24:35 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -47,7 +47,7 @@ int		char_check(char *ret, char c)
   return (0);
 }
 
-void		perform_check(char *ret, int *i, int *check, t_tree **root)
+int		perform_check(char *ret, int *i, int *check, t_tree **root)
 {
   if ((*check = char_check(ret, ';')) != 0)
     *i = *check;
@@ -61,12 +61,17 @@ void		perform_check(char *ret, int *i, int *check, t_tree **root)
       if (*check == -1)
         (*root)->op = '&';
     }
-  else if ((*check = redir_check(ret, i, '>')) != 0)
-    redir_set(check, root, i, '1');
   else if ((*check = char_check(ret, '|')) != 0)
     *i = *check;
-  else if ((*check = redir_check(ret, i, '<')) != 0)
-    redir_set(check, root, i, '0');
-  if (*check != -1)
+  else if ((*check = redir_check(ret, i)) != -2)
+    redir_set(check, root, i, ret);
+  if (*check != -1 && (ret[*i] == '&' || ret[*i] == '|' || ret[*i] == '>'
+		       || ret[*i] == '<' || ret[*i] == ';'))
     (*root)->op = ret[*i];
+  else if (*check != -1)
+    {
+      my_putstr_err("Invalid syntax\n");
+      return (1);
+    }
+  return (0);
 }

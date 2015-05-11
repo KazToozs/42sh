@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Fri May  8 14:12:41 2015 cristopher toozs-hobson
+** Last update Fri May  8 12:10:23 2015 cristopher toozs-hobson
 */
 
 #ifndef SHELL_H_
@@ -129,15 +129,11 @@ int		and_op(t_tree *root, t_main *m);
 int		semi_colon(t_tree *root, t_main *m);
 int		right_op_check(t_tree *root, t_main *m);
 int		right_op(t_tree *root, int type, t_main *m);
-int		dbl_left_close(t_left *l, t_tree *root, t_main *m);
-void		dbl_left_cmp(t_left *l);
-int		dbl_left_read(t_left *l);
 int		double_left_fork(t_tree *root, t_main *m);
 int		left_op(t_tree *root, t_main *m);
 int             or_check(char *ret, int *n);
 int             redir_check(char *ret, int *n);
 int		and_check(char *ret, int *n);
 void		redir_set(int *check, t_tree **root, int *i, char *ret);
-void		set_file_word(t_tree *root, char ***tab);
 
 #endif

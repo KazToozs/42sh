@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Fri May  1 12:02:46 2015 cristopher toozs-hobson
+## Last update Fri May  8 14:04:01 2015 cristopher toozs-hobson
 ##
 
 SRC	=	./sources/my_putchar.c		\
@@ -44,6 +44,7 @@ SRC	=	./sources/my_putchar.c		\
 		./sources/my_getnbr.c		\
 		./sources/my_strncmp.c		\
 		./sources/shell.c		\
+		./sources/double_left.c		\
 		./sources/main.c
 
 NAME	=	42sh
