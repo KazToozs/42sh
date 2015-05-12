@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Fri May  8 14:12:41 2015 cristopher toozs-hobson
+** Last update Tue May 12 11:31:30 2015 cristopher toozs-hobson
 */
 
 #ifndef SHELL_H_
@@ -79,7 +79,6 @@ typedef struct	s_glo
 
 extern g_glo	glo;
 
-void		show_tree(t_tree *root, int nb);
 int		my_shell(char *ret, t_main *m);
 int		make_tree(t_tree **root, char *ret);
 void		manage_error(char *str);

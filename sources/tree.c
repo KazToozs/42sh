@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Feb 17 09:52:57 2015 cristopher toozs-hobson
-** Last update Fri May  8 13:05:40 2015 cristopher toozs-hobson
+** Last update Tue May 12 11:30:55 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -45,29 +45,6 @@ void		free_tree(t_tree *root)
     free_tree(root->right);
   if (root->left == NULL && root->right == NULL)
     free(root);
-}
-
-#include <stdio.h>
-void            show_tree(t_tree *tree, int nb)
-{
-  //Michel's read tree 
-  int           tmp;
-
-  if (tree->left != NULL)
-    show_tree(tree->left, nb + 1);
-  tmp = nb;
-  while (tmp > 0)
-    {
-      fprintf(stderr, "\t");
-      tmp = tmp - 1;
-    }
-  if (tree->op != 0)
-    fprintf(stderr, "op[%c]", tree->op);
-  if (tree->op == 0)
-    fprintf(stderr, "exp[%s]", tree->exp);
-  fprintf(stderr, "\n");
-  if (tree->right)
-    show_tree(tree->right, nb + 1);
 }
 
 int		set_nodes(t_tree **root, char *ret)
