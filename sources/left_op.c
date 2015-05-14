@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:04:23 2015 cristopher toozs-hobson
-** Last update Fri May  8 14:18:57 2015 cristopher toozs-hobson
+** Last update Thu May 14 13:42:41 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -44,7 +44,7 @@ int		left_prep(t_tree *root)
     }
   if ((fd = open(tab[0], O_RDONLY)) == -1)
     {
-      my_putstr_err("No such file or directory lol\n");
+      my_putstr_err("No such file or directory\n");
       return (1);
     }
   if (dup2(fd, 0) == -1)

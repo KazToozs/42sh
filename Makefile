@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Fri May  8 14:04:01 2015 cristopher toozs-hobson
+## Last update Thu May 14 16:19:59 2015 cristopher toozs-hobson
 ##
 
 SRC	=	./sources/my_putchar.c		\
@@ -53,7 +53,7 @@ CC	=	gcc
 
 COMP	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -g -g3
+CFLAGS	=	-W -Wall -Wextra
 
 CFLAGS	+=	-I./include
 
