@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Thu May 14 12:02:26 2015 cristopher toozs-hobson
+** Last update Thu May 14 11:45:24 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -16,27 +16,6 @@
 g_glo		glo;
 extern char	**environ;
 
-void		put_pwd(char *pwd, int fd)
-{
-  int		count;
-  int		i;
-
-  i = my_strlen(pwd) - 1;
-  count = 0;
-  while (i >= 0 && count < 2)
-    {
-      if (pwd[i] == '/')
-	count++;
-      i--;
-    }
-  i++;
-  while (pwd[i] != '\0')
-    {
-      write(fd, &pwd[i], sizeof(char));
-      i++;
-    }
-}
-
 void		display_prompt(int fd, t_env *env)
 {
   char		*pwd;
@@ -45,23 +24,23 @@ void		display_prompt(int fd, t_env *env)
     {
       if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
 	{
-	  my_putstr("42sh[");
-	  put_pwd(pwd, 1);
-	  my_putstr("]$> ");
+	  my_putstr("42sh <");
+	  my_putstr(pwd);
+	  my_putstr("> $>");
 	}
       else
-	my_putstr("42sh[<Missing PWD>]$> ");
+	my_putstr("42sh <[Missing PWD]> $>");
     }
   else if (fd == 2)
     {
       if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
 	{
-	  my_putstr_err("42sh[");
-	  put_pwd(pwd, 2);
-	  my_putstr_err("]$> ");
+	  my_putstr_err("42sh <");
+	  my_putstr_err(pwd);
+	  my_putstr_err("> $>");
 	}
       else
-	my_putstr_err("42sh[<Missing PWD>]$> ");
+	my_putstr_err("42sh <[Missing PWD]> $>");
     }
 }
 

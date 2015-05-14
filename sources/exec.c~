@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:46:52 2015 cristopher toozs-hobson
+** Last update Thu May 14 11:44:36 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -16,12 +16,15 @@
 char		**add_slash(char **tab)
 {
   int		i;
+  char		*tmp;
 
   i = 1;
   while (tab[i] != NULL)
     {
+      tmp = tab[i];
       tab[i] = my_strcat(tab[i], "/", 1);
       i++;
+      free(tmp);
     }
   return (tab);
 }

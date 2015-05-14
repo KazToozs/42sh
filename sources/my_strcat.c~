@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Oct  8 20:20:31 2014 cristopher toozs-hobson
-** Last update Thu May 14 11:21:00 2015 cristopher toozs-hobson
+** Last update Mon Apr 20 16:21:46 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -40,21 +40,12 @@ char		*new_str(char *first, char *second)
   return (new);
 }
 
-char		*my_strcat(char *first, char *second, int option)
+char		*my_strcat(char *first, char *second)
 {
   char		*new;
 
   if (first == NULL && second == NULL)
     return (NULL);
   new = new_str(first, second);
-  if (option == 1)
-    free(first);
-  else if (option == 2)
-    free(second);
-  else if (option == 3)
-    {
-      free(first);
-      free(second);
-    }
   return (new);
 }

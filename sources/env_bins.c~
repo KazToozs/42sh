@@ -5,34 +5,34 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Jan 31 00:30:58 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:29:37 2015 cristopher toozs-hobson
+** Last update Wed May 13 17:04:29 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
 #include "my.h"
 
-void		create_env_var(char *value, char *var, t_env *tmp)
+void		create_env_var(char *value, char *var, t_env *tmp, t_main *m)
 {
   char		*new;
   char		**tab;
 
   if (glo.env != NULL)
     {
-      new = my_strcat((tab = my_str_tab(glo.env->var))[0], "=", 0);
-      new = my_strcat(new, value, 1);
+      new = my_strcat((tab = my_str_tab(glo.env->var))[0], "=");
+      new = my_strcat(new, value);
       free_tab(tab);
       glo.env->var = new;
     }
   else
     {
       glo.env = tmp;
-      new = my_strcat(var, "=", 0);
-      new = my_strcat(new, value, 1);
+      new = my_strcat(var, "=");
+      new = my_strcat(new, value);
       my_put_in_list_end(&glo.env, new, &tmp);
     }
 }
 
-void		add_env(char *var, char *value)
+void		add_env(char *var, char *value, t_main *m)
 {
   t_env		*tmp;
   char		**tab;
@@ -44,14 +44,14 @@ void		add_env(char *var, char *value)
       free_tab(tab);
       glo.env = glo.env->next;
     }
-  create_env_var(value, var, tmp);
+  create_env_var(value, var, tmp, m);
   glo.env = tmp;
 }
 
 int		my_setenv(t_main *m)
 {
   if (m->word_tab[1] != NULL)
-    add_env(m->word_tab[1], m->word_tab[2]);
+    add_env(m->word_tab[1], m->word_tab[2], m);
   else
     {
       my_putstr_err("Missing argument. Use: setenv [-var] [-value]\n");
@@ -60,7 +60,7 @@ int		my_setenv(t_main *m)
   return (0);
 }
 
-int		display_env()
+int		display_env(t_main *m)
 {
   if (glo.env != NULL)
     my_show_list(glo.env);

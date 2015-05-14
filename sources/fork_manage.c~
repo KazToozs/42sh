@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Feb 16 11:41:25 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:43:04 2015 cristopher toozs-hobson
+** Last update Wed May 13 17:06:17 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -27,7 +27,7 @@ int		chain_count(t_env *tab)
   return (i);
 }
 
-char		**create_env(t_env *env)
+char		**create_env(t_env *env, t_main *m)
 {
   int		i;
   char		**tab;
@@ -46,11 +46,11 @@ char		**create_env(t_env *env)
   return (tab);
 }
 
-int		fork_child(char **word_tab, t_env *env)
+int		fork_child(char **word_tab, t_env *env, t_main *m)
 {
   char		**tab;
 
-  if ((tab = create_env(env)) == NULL)
+  if ((tab = create_env(env, m)) == NULL)
     return (1);
   if (execve(word_tab[0], word_tab, tab) == -1)
     {
@@ -74,7 +74,7 @@ int		execute_fork(char **word_tab, t_env *env, t_main *m)
   else if (pid == 0)
     {
       glo.pid = 0;
-      fork_child(word_tab, env);
+      fork_child(word_tab, env, m);
       return (1);
     }
   else
