@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Thu May 14 12:02:26 2015 cristopher toozs-hobson
+** Last update Sat May 16 19:30:41 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -44,13 +44,13 @@ void		display_prompt(int fd, t_env *env)
   if (fd == 1)
     {
       if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
-	{
-	  my_putstr("42sh[");
-	  put_pwd(pwd, 1);
+      	{
+      	  my_putstr("42sh[");
+      	  put_pwd(pwd, 1);
 	  my_putstr("]$> ");
 	}
       else
-	my_putstr("42sh[<Missing PWD>]$> ");
+      	my_putstr("42sh[<Missing PWD>]$> ");
     }
   else if (fd == 2)
     {

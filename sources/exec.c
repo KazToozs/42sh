@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:46:52 2015 cristopher toozs-hobson
+** Last update Sat May 16 19:27:59 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -31,9 +31,13 @@ char		*find_function(char *path, char *function)
   char		**tab;
   char		*ret;
 
-  tab = my_str_tab(path);
-  tab = add_slash(tab);
-  free(tab[0]);
+  tab = NULL;
+  if (path)
+    {
+      tab = my_str_tab(path);
+      tab = add_slash(tab);
+      free(tab[0]);
+    }
   if (function == NULL)
     return (function);
   ret = check_access(tab, function);
@@ -50,8 +54,9 @@ int		execute(char *path, int i, t_main *m)
       check = g_bin[i].ptr(m);
       return (check);
     }
-  else if (path != NULL && (save = find_function(path, m->word_tab[0])))
+  else if (/*path != NULL && */(save = find_function(path, m->word_tab[0])))
     {
+      
       m->word_tab[0] = save;
       check = execute_fork(m->word_tab, glo.env, m);
       return (check);
