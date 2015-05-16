@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 21:44:08 2015 cristopher toozs-hobson
-** Last update Wed May 13 17:00:53 2015 cristopher toozs-hobson
+** Last update Fri May 15 17:45:00 2015 cristopher toozs-hobson
 */
 
 #include <signal.h>
@@ -43,6 +43,11 @@ int		manage_signal()
       return (1);
     }
   else if (signal(SIGPIPE, &handler) == SIG_ERR)
+    {
+      my_putstr_err("Signal error\n");
+      return (1);
+    }
+  else if (signal(SIGSEGV, &handler) == SIG_ERR)//
     {
       my_putstr_err("Signal error\n");
       return (1);

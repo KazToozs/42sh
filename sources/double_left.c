@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  8 14:02:15 2015 cristopher toozs-hobson
-** Last update Fri May  8 14:10:53 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:02:58 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -26,7 +26,7 @@ int		double_left(t_tree *root, t_main *m)
   if ((l.tab = malloc(sizeof(char *) * 2)) == NULL)
     return (1);
   l.tab[0] = NULL;
-  set_file_word(root, &l.ret);
+  l.ret = set_file_word(root);
   if (!l.ret[0])
     {
       my_putstr_err("Missing right operand\n");

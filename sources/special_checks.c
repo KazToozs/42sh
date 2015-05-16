@@ -5,31 +5,11 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sun Apr 26 15:30:02 2015 cristopher toozs-hobson
-** Last update Fri May  8 12:24:30 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:28:45 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
 #include "my.h"
-
-int		and_check(char *ret, int *n)
-{
-  int		i;
-  int		quote;
-
-  i = my_strlen(ret) - 1;
-  quote = 0;
-  while (i >= 0)
-    {
-      quote = quotes(ret[i], quote);
-      if (ret[i] == '&' && ret[i - 1] == '&')
-        {
-          *n = i - 1;
-          return (-1);
-        }
-      i--;
-    }
-  return (0);
-}
 
 void		redir_set(int *check, t_tree **root, int *i, char *ret)
 {
@@ -69,7 +49,18 @@ int		redir_check(char *ret, int *n)
   return (-2);
 }
 
-int		or_check(char *ret, int *n)
+int		spec_sep_check(char *ret, int *i)
+{
+  if ((ret[*i] == '&' && ret[*i - 1] == '&')
+      || (ret[*i] == '|' && ret[*i - 1] == '|'))
+    {
+      *i = *i - 1;
+      return (-1);
+    }
+  return (0);
+}
+
+int		separator_checks(char *ret, int *n)
 {
   int		i;
   int		quote;
@@ -79,12 +70,20 @@ int		or_check(char *ret, int *n)
   while (i >= 0)
     {
       quote = quotes(ret[i], quote);
-      if (ret[i] == '|' && ret[i - 1] == '|')
-        {
-          *n = i - 1;
-          return (-1);
-        }
+      if ((ret[i] == ';' || ret[i] == '&' || ret[i] == '|')
+	  && quote == 0)
+	{
+	  if (ret[i] == ';')
+	    return (i);
+	  else if (ret[i] == '&' || ret[i] == '|')
+	    if (spec_sep_check(ret, &i) == -1)
+	      {
+		*n = i;
+		if (ret[i] == '&' || ret[i] == '|')
+		  return (-1);
+	      }
+	}
       i--;
     }
-  return (0);
+  return (-2);
 }

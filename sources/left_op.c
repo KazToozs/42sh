@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:04:23 2015 cristopher toozs-hobson
-** Last update Thu May 14 13:42:41 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:06:57 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -15,19 +15,22 @@
 #include "minishell.h"
 #include "my.h"
 
-void		set_file_word(t_tree *root, char ***tab)
+char		**set_file_word(t_tree *root)
 {
+  char		**tab;
   char		*tmp;
 
   if (root->right->exp)
     {
-      *tab = my_str_tab(root->right->exp);
-      if (*tab && *tab[0])
+      tab = my_str_tab(root->right->exp);
+      if (tab && tab[0])
         {
-          tmp = my_strdup(root->right->exp + my_strlen(*tab[0]) + 1);
+          tmp = my_strdup(root->right->exp + my_strlen(tab[0]) + 1);
           root->right->exp = tmp;
         }
+      return (tab);
     }
+  return (NULL);
 }
 
 int		left_prep(t_tree *root)
@@ -35,8 +38,7 @@ int		left_prep(t_tree *root)
   char		**tab;
   int		fd;
 
-  tab = NULL;
-  set_file_word(root, &tab);
+  tab = set_file_word(root);
   if (tab && !tab[0])
     {
       my_putstr_err("Missing file operand\n");

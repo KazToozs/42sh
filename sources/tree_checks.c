@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 22:09:42 2015 cristopher toozs-hobson
-** Last update Fri May  8 12:24:35 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:29:08 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -49,17 +49,17 @@ int		char_check(char *ret, char c)
 
 int		perform_check(char *ret, int *i, int *check, t_tree **root)
 {
-  if ((*check = char_check(ret, ';')) != 0)
-    *i = *check;
-  else if ((*check = or_check(ret, i)) != 0)
+  if ((*check = separator_checks(ret, i)) != -2)
     {
       if (*check == -1)
-        (*root)->op = 'r';
-    }
-  else if ((*check = and_check(ret, i)) != 0)
-    {
-      if (*check == -1)
-        (*root)->op = '&';
+	{
+	  if (ret[*i] == '&')
+	    (*root)->op = '&';
+	  if (ret[*i] == '|')
+	    (*root)->op = 'r';
+	}
+      else
+	*i = *check;
     }
   else if ((*check = char_check(ret, '|')) != 0)
     *i = *check;

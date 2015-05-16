@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Apr 25 16:09:43 2015 cristopher toozs-hobson
-** Last update Fri May  8 13:58:03 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:03:51 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -31,9 +31,8 @@ char		**right_errors(t_tree *root)
 {
   char		**tab;
 
-  tab = NULL;
   if (root->right->exp)
-    set_file_word(root, &tab);
+    tab = set_file_word(root);
   else
     {
       my_putstr_err("Invalid syntax\n");

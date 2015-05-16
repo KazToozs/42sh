@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Apr 25 16:12:02 2015 cristopher toozs-hobson
-** Last update Fri May  1 16:30:11 2015 cristopher toozs-hobson
+** Last update Sat May 16 17:26:49 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -44,16 +44,13 @@ int		and_op(t_tree *root, t_main *m)
   int		ret;
 
   if (root->left)
-    {
-      if ((ret = launch_tree(root->left, m)) != 0)
-        return (ret);
-    }
+    ret = launch_tree(root->left, m);
   if (root->right && ret == 0 && glo.pid == -1)
     {
       if ((ret = launch_tree(root->right, m)) != 0)
         return (ret);
     }
-  return (1);
+  return (ret);
 }
 
 int		or_op(t_tree *root, t_main *m)
@@ -63,6 +60,6 @@ int		or_op(t_tree *root, t_main *m)
   if (root->left)
     ret = launch_tree(root->left, m);
   if (root->right && ret != 0)
-    return (launch_tree(root->right, m));
+    ret = launch_tree(root->right, m);
   return (ret);
 }
