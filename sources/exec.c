@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Sat May 16 19:27:59 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:38:50 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -54,14 +54,13 @@ int		execute(char *path, int i, t_main *m)
       check = g_bin[i].ptr(m);
       return (check);
     }
-  else if (/*path != NULL && */(save = find_function(path, m->word_tab[0])))
+  else if ((save = find_function(path, m->word_tab[0])))
     {
-      
       m->word_tab[0] = save;
       check = execute_fork(m->word_tab, glo.env, m);
       return (check);
     }
-  else
+  else if (m->word_tab)
     {
       my_putstr_err("Unknown command\n");
       return (1);
@@ -81,6 +80,10 @@ int		execute_function(char *ret, t_main *m)
   while (ret[0] != '\0' && g_bin[i].str != NULL
          && (my_strcmp(m->word_tab[0], g_bin[i].str) != 0))
     i++;
+  if ((m->word_tab = globbing(m->word_tab)) == NULL)
+    {
+      return (1);
+    }
   check = execute(path, i, m);
   free_tab(m->word_tab);
   return (check);

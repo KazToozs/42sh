@@ -5,11 +5,11 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri Oct 10 14:21:53 2014 cristopher toozs-hobson
-** Last update Thu May 14 10:32:18 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:49:07 2015 cristopher toozs-hobson
 */
 
-#ifndef LIB_MY_
-# define LIB_MY_
+#ifndef _LIB_MY_
+# define _LIB_MY_
 
 char		**my_str_tab(char *str);
 void		my_putchar(char c);
@@ -26,4 +26,4 @@ char		*my_strcpy(char *dest, char *src);
 char		*my_strncpy(char *dest, char *src, int n);
 void		my_put_nbr(int nb);
 
-#endif
+#endif /* _LIB_MY_ */

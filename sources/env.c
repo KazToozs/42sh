@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Feb 16 11:32:54 2015 cristopher toozs-hobson
-** Last update Thu May 14 12:07:05 2015 cristopher toozs-hobson
+** Last update Sun May 17 10:22:50 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -78,7 +78,8 @@ char		*env_var_val(t_env *env, char *var, int display)
   int		i;
   char		*tmp;
 
-  tmp = my_strdup(var);
+  if ((tmp = my_strdup(var)) == NULL)
+    return (NULL);
   if ((var = find_var(env, var)) != NULL)
     {
       tab = my_str_tab(var);

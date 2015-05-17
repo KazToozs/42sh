@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  8 14:02:15 2015 cristopher toozs-hobson
-** Last update Sat May 16 17:02:58 2015 cristopher toozs-hobson
+** Last update Sun May 17 10:37:46 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -26,7 +26,8 @@ int		double_left(t_tree *root, t_main *m)
   if ((l.tab = malloc(sizeof(char *) * 2)) == NULL)
     return (1);
   l.tab[0] = NULL;
-  l.ret = set_file_word(root);
+  if ((l.ret = set_file_word(root)) == NULL)
+    return (1);
   if (!l.ret[0])
     {
       my_putstr_err("Missing right operand\n");
@@ -56,7 +57,7 @@ int		double_left_fork(t_tree *root, t_main *m)
         {
           return (ret);
         }
-      return (1);
+      return (0);
     }
   else
     {

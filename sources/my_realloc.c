@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 11 17:26:37 2015 cristopher toozs-hobson
-** Last update Sat Apr 25 15:02:29 2015 cristopher toozs-hobson
+** Last update Sun May 17 10:26:57 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -41,7 +41,8 @@ char		**my_realloc_tab(char **buffer, int size)
   i = 0;
   while (i < (size - 1))
     {
-      tmp[i] = my_strdup(buffer[i]);
+      if ((tmp[i] = my_strdup(buffer[i])) == NULL)
+	return (NULL);
       tmp[i] = my_strcpy(tmp[i], buffer[i]);
       i++;
     }

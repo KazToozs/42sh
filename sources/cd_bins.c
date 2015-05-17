@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Mar 25 17:45:50 2015 cristopher toozs-hobson
-** Last update Thu May 14 12:13:32 2015 cristopher toozs-hobson
+** Last update Sun May 17 10:22:07 2015 cristopher toozs-hobson
 */
 
 #include	<stdlib.h>
@@ -71,7 +71,8 @@ int		cd_minus(t_main *m)
 
   if ((ret = env_var_val(glo.env, "PWD", 0)) == NULL)
     return (1);
-  pwd = my_strdup(ret);
+  if ((pwd = my_strdup(ret)) == NULL)
+    return (1);
   if (my_strcmp(m->word_tab[1], "-") == 0)
     {
       if ((ret = env_var_val(glo.env, "OLDPWD", 1)) == NULL)

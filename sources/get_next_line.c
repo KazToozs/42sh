@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Nov 19 11:00:34 2014 cristopher toozs-hobson
-** Last update Fri May  1 17:06:43 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:26:23 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -46,7 +46,7 @@ char		*my_dup_free(char *buffer)
   while (buffer[size] != '\0')
     size++;
   if ((tmp = malloc(sizeof(char) * (size + 1))) == NULL)
-      return (NULL);
+    return (NULL);
   while (buffer[i] != '\0')
     {
       tmp[i] = buffer[i];

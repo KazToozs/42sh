@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:00:11 2015 cristopher toozs-hobson
-** Last update Fri May  8 14:13:29 2015 cristopher toozs-hobson
+** Last update Sat May 16 22:54:37 2015 cristopher toozs-hobson
 */
 
 #include "my.h"
@@ -26,7 +26,7 @@ int		dbl_left_read(t_left *l)
       my_putstr_err("> ");
     }
   if (l->tab[i - 1] == NULL)
-    return (0);
+    return (1);
   l->tab[i] = NULL;
   if (pipe(l->pipefd) == -1)
     return (1);

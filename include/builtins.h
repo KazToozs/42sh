@@ -5,11 +5,11 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Jan 20 20:05:19 2015 cristopher toozs-hobson
-** Last update Fri May  1 15:48:04 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:48:40 2015 cristopher toozs-hobson
 */
 
-#ifndef BIN_H_
-#define BIN_H_
+#ifndef _BIN_H_
+#define _BIN_H_
 
 typedef struct	s_bins
 {
@@ -30,4 +30,4 @@ t_bins		g_bin[] =
     {NULL, NULL}
   };
 
-#endif
+#endif /* _BIN_H_ */

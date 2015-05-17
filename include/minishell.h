@@ -5,11 +5,11 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Sat May 16 21:02:15 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:48:16 2015 cristopher toozs-hobson
 */
 
-#ifndef SHELL_H_
-#define SHELL_H_
+#ifndef _SHELL_H_
+#define _SHELL_H_
 
 #define WRITE_END 1
 #define READ_END 0
@@ -80,7 +80,6 @@ typedef struct	s_glo
 extern g_glo	glo;
 
 void		display_prompt(int fd, t_env *env);
-void		show_tree(t_tree *tree, int set);
 int		my_shell(char *ret, t_main *m);
 void		manage_error(char *str);
 void		status_error(int status);
@@ -98,6 +97,7 @@ int		launch_tree(t_tree *root, t_main *m);
 char		**my_realloc_tab(char **str, int size);
 void		free_tree(t_tree *root);
 char		*check_access(char **tab, char *function);
+char		**globbing(char **exp);
 
 /*
 ** Parsing
@@ -125,7 +125,7 @@ int		my_setenv(t_main *m);
 void		my_show_list(t_env *list);
 int		display_env();
 int		my_echo(t_main *m);
-int             redir_check(char *ret, int *n);
+int		redir_check(char *ret, int *n);
 void		redir_set(int *check, t_tree **root, int *i, char *ret);
 int		separator_checks(char *ret, int *n);
 
@@ -146,4 +146,4 @@ int		double_left_fork(t_tree *root, t_main *m);
 int		left_op(t_tree *root, t_main *m);
 char		**set_file_word(t_tree *root);
 
-#endif
+#endif /* _SHELL_H_ */

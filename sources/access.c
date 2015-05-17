@@ -5,17 +5,17 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Apr 27 16:33:28 2015 cristopher toozs-hobson
-** Last update Sat May 16 18:49:06 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:06:00 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "my.h"
 
-char            *path_access(char **tab, char *function, int i)
+char		*path_access(char **tab, char *function, int i)
 {
-  char          *tmp;
-  char          *ret;
+  char		*tmp;
+  char		*ret;
 
   tmp = tab[i];
   if (access((ret = my_strcat(tab[i], function, 0)), F_OK) == 0)
@@ -31,9 +31,9 @@ char            *path_access(char **tab, char *function, int i)
   return (NULL);
 }
 
-int             check_slash(char *function)
+int		check_slash(char *function)
 {
-  int           i;
+  int		i;
 
   i = my_strlen(function) - 1;
   while (i >= 0)
@@ -45,10 +45,10 @@ int             check_slash(char *function)
   return (0);
 }
 
-char            *check_access(char **tab, char *function)
+char		*check_access(char **tab, char *function)
 {
-  char          *ret;
-  int           i;
+  char		*ret;
+  int		i;
 
   i = 1;
   if (check_slash(function) == 1)

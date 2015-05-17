@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:04:23 2015 cristopher toozs-hobson
-** Last update Sat May 16 17:06:57 2015 cristopher toozs-hobson
+** Last update Sun May 17 10:58:35 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -25,7 +25,9 @@ char		**set_file_word(t_tree *root)
       tab = my_str_tab(root->right->exp);
       if (tab && tab[0])
         {
-          tmp = my_strdup(root->right->exp + my_strlen(tab[0]) + 1);
+          if ((tmp = my_strdup(root->right->exp + my_strlen(tab[0]) + 1))
+	      == NULL)
+	    return (NULL);
           root->right->exp = tmp;
         }
       return (tab);
@@ -38,7 +40,8 @@ int		left_prep(t_tree *root)
   char		**tab;
   int		fd;
 
-  tab = set_file_word(root);
+  if ((tab = set_file_word(root)) == NULL)
+    return (1);
   if (tab && !tab[0])
     {
       my_putstr_err("Missing file operand\n");

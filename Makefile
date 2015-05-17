@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Fri May  8 14:04:01 2015 cristopher toozs-hobson
+## Last update Sun May 17 12:01:56 2015 cristopher toozs-hobson
 ##
 
 SRC	=	./sources/my_putchar.c		\
@@ -45,6 +45,7 @@ SRC	=	./sources/my_putchar.c		\
 		./sources/my_strncmp.c		\
 		./sources/shell.c		\
 		./sources/double_left.c		\
+		./sources/globbing.c		\
 		./sources/main.c
 
 NAME	=	42sh
@@ -53,7 +54,7 @@ CC	=	gcc
 
 COMP	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -g -g3
+CFLAGS	=	-W -Wall -Wextra
 
 CFLAGS	+=	-I./include
 

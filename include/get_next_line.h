@@ -5,11 +5,11 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sun Nov 16 15:17:52 2014 cristopher toozs-hobson
-** Last update Sun Feb 22 20:35:59 2015 cristopher toozs-hobson
+** Last update Sun May 17 12:47:49 2015 cristopher toozs-hobson
 */
 
-#ifndef G_N_L_H_
-#define G_N_L_H_
+#ifndef _G_N_L_H_
+#define _G_N_L_H_
 
 #include <unistd.h>
 
@@ -18,4 +18,4 @@
 char	*get_next_line(const int fd);
 char	*my_realloc(char *str, int size);
 
-#endif
+#endif /* _G_N_L_H_ */
