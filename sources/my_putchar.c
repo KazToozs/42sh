@@ -5,12 +5,15 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Dec  3 17:05:08 2014 cristopher toozs-hobson
-** Last update Fri May  1 17:09:46 2015 cristopher toozs-hobson
+** Last update Mon May 18 14:38:40 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
 
 void		my_putchar(char c)
 {
-  write(1, &c, 1);
+  unsigned char	d;
+
+  d = (unsigned char)c;
+  write(1, &d, 1);
 }

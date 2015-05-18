@@ -5,21 +5,15 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Thu Dec  4 11:12:29 2014 cristopher toozs-hobson
-** Last update Thu Mar 12 17:39:40 2015 cristopher toozs-hobson
+** Last update Mon May 18 15:39:51 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
+#include "my.h"
 
 void	my_putstr_err(char *str)
 {
-  int	i;
-
-  i = 0;
   if (str == NULL)
     return ;
-  while (str[i] != '\0')
-    {
-      write(2, &str[i], 1);
-      i++;
-    }
+  write(1, (unsigned char *)str, my_strlen(str));
 }

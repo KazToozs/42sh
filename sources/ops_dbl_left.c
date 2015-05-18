@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:00:11 2015 cristopher toozs-hobson
-** Last update Sat May 16 22:54:37 2015 cristopher toozs-hobson
+** Last update Mon May 18 13:10:53 2015 cristopher toozs-hobson
 */
 
 #include "my.h"
@@ -16,7 +16,7 @@ int		dbl_left_read(t_left *l)
   int		i;
 
   i = 1;
-  while (((l->tab[i - 1] = get_next_line(0)) != NULL)
+  while (((l->tab[i - 1] = get_cmd_str()) != NULL)
          && my_strcmp(l->tab[i - 1], l->ret[0]) != 0)
     {
       l->tab[i] = NULL;

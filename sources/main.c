@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Sat May 16 19:30:41 2015 cristopher toozs-hobson
+** Last update Mon May 18 15:15:11 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -16,10 +16,11 @@
 g_glo		glo;
 extern char	**environ;
 
-void		put_pwd(char *pwd, int fd)
+char		*put_pwd(char *pwd)
 {
   int		count;
   int		i;
+  char		*new;
 
   i = my_strlen(pwd) - 1;
   count = 0;
@@ -30,39 +31,30 @@ void		put_pwd(char *pwd, int fd)
       i--;
     }
   i++;
-  while (pwd[i] != '\0')
-    {
-      write(fd, &pwd[i], sizeof(char));
-      i++;
-    }
+  new = my_strdup(pwd + i);
+  free(pwd);
+  return (new);
 }
 
 void		display_prompt(int fd, t_env *env)
 {
   char		*pwd;
 
+  if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
+    {
+      pwd = put_pwd(pwd);
+      pwd = my_strcat("42sh[", pwd, 2);
+      pwd = my_strcat(pwd, "]$> ", 1);
+      glo.prompt = my_strdup(pwd);
+    }
+  else
+    {
+      glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
+    }
   if (fd == 1)
-    {
-      if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
-      	{
-      	  my_putstr("42sh[");
-      	  put_pwd(pwd, 1);
-	  my_putstr("]$> ");
-	}
-      else
-      	my_putstr("42sh[<Missing PWD>]$> ");
-    }
-  else if (fd == 2)
-    {
-      if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
-	{
-	  my_putstr_err("42sh[");
-	  put_pwd(pwd, 2);
-	  my_putstr_err("]$> ");
-	}
-      else
-	my_putstr_err("42sh[<Missing PWD>]$> ");
-    }
+    my_putstr(pwd);
+  if (fd == 2)
+    my_putstr_err(pwd);
 }
 
 int		start_up(t_main *m)
@@ -99,7 +91,7 @@ int		main()
 
   if (start_up(&m) == 1)
     return (1);
-  while ((ret = get_next_line(0)) != NULL)
+  while ((ret = get_cmd_str()) != NULL)
     {
       if ((check = my_shell(ret, &m)) != -3)
 	{

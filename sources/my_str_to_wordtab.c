@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Nov  3 10:09:14 2014 cristopher toozs-hobson
-** Last update Fri May  1 17:12:49 2015 cristopher toozs-hobson
+** Last update Mon May 18 15:09:39 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -20,13 +20,11 @@ int		count_words(char *str)
   cpt = 0;
   while (str[i] != '\0')
     {
-      if (str[i] >= 33 && str[i] <= 126
-	  && str[i] != ':' && str[i] != '=' && str[i] != '"')
+      if (str[i] != ':' && str[i] != '=' && str[i] != '"' && str[i] != ' ')
 	{
 	  cpt++;
-	  while ((str[i] && str[i] >= 33 && str[i] <= 126)
-		 && str[i] != ':' && str[i] != '='
-		 && str[i] != '"')
+	  while (str[i] != '\0' && str[i] != ':' && str[i] != '='
+		 && str[i] != ' ' && str[i] != '"')
 	    i++;
 	}
       else
@@ -40,8 +38,7 @@ int		count_chars(char *str, int *i)
   int		cpt;
 
   cpt = 0;
-  while (str[*i] && (str[*i] >= 33 && str[*i] <= 126
-		     && str[*i] != ':' && str[*i] != '=')
+  while (str[*i] && str[*i] != ':' && str[*i] != '=' && str[*i] != ' '
 	 && str[*i] != '"')
     {
       cpt++;
@@ -64,8 +61,7 @@ char		**my_str_tab(char *str)
     return (NULL);
   while (str[i] && words > 0)
     {
-      if (str[i] >= 33 && str[i] <= 126 && str[i] != ':'
-	  && str[i] != '=' && str[i] != '"')
+      if (str[i] != ':' && str[i] != '=' && str[i] != '"' && str[i] != ' ')
 	{
 	  if ((tab[size] = my_strdup(str + i)) == NULL)
 	    return (NULL);

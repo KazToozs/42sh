@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Sun May 17 12:48:16 2015 cristopher toozs-hobson
+** Last update Mon May 18 14:56:12 2015 cristopher toozs-hobson
 */
 
 #ifndef _SHELL_H_
@@ -75,10 +75,13 @@ typedef struct	s_glo
   pid_t		gpid;
   int		fg;
   int		x;
+  char		*prompt;
 }		g_glo;
 
 extern g_glo	glo;
 
+void		show_tree(t_tree *tree, int nb);
+char		*get_cmd_str();
 void		display_prompt(int fd, t_env *env);
 int		my_shell(char *ret, t_main *m);
 void		manage_error(char *str);

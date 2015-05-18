@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Mar  3 14:08:22 2015 cristopher toozs-hobson
-** Last update Wed May 13 17:03:47 2015 cristopher toozs-hobson
+** Last update Mon May 18 14:32:52 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -93,7 +93,7 @@ int		my_echo(t_main *m)
   else
     {
       execute_echo(0, m);
-      my_putchar('\n');
+      my_putchar((unsigned char)'\n');
     }
   return (0);
 }
