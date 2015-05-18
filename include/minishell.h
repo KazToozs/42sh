@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Mon May 18 14:56:12 2015 cristopher toozs-hobson
+** Last update Mon May 18 17:27:34 2015 jules palluau
 */
 
 #ifndef _SHELL_H_
@@ -15,6 +15,7 @@
 #define READ_END 0
 
 #include <unistd.h>
+# include "alias.h"
 
 typedef struct	s_env
 {
@@ -60,6 +61,7 @@ typedef struct	s_main
   int		ret;
   int		sig;
   char		**word_tab;
+  struct s_file	*file;
 }		t_main;
 
 typedef struct	s_exec
@@ -131,6 +133,11 @@ int		my_echo(t_main *m);
 int		redir_check(char *ret, int *n);
 void		redir_set(int *check, t_tree **root, int *i, char *ret);
 int		separator_checks(char *ret, int *n);
+int		built_alias(t_main *m);
+int		built_export(t_main *m);
+int		built_source(t_main *m);
+struct s_alias	*source(t_main *m);
+struct s_file	*init_alias(t_main *m);
 
 /*
 ** Operations

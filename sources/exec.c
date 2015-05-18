@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Mon May 18 14:42:43 2015 cristopher toozs-hobson
+** Last update Mon May 18 16:12:09 2015 jules palluau
 */
 
 #include <stdlib.h>
@@ -75,6 +75,8 @@ int		execute_function(char *ret, t_main *m)
   int		check;
 
   i = 0;
+  if ((ret = alias(ret, m->file)) == NULL)
+    return (1);
   m->word_tab = my_str_tab(ret);
   path = find_var(glo.env, "PATH");
   while (ret[0] != '\0' && g_bin[i].str != NULL

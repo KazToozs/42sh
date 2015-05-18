@@ -5,14 +5,14 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Mon May 18 13:12:15 2015 cristopher toozs-hobson
+## Last update Mon May 18 17:29:26 2015 jules palluau
 ##
 
 SRC	=	./sources/my_putchar.c			\
 		./sources/my_putstr.c			\
 		./sources/my_put_nbr.c			\
 		./sources/my_strlen.c			\
-		./sources/my_str_to_wordtab.c		\
+		./sources/my_str_tab.c			\
 		./sources/my_strcmp.c			\
 		./sources/my_putstr_err.c		\
 		./sources/my_strcpy.c			\
@@ -54,6 +54,13 @@ SRC	=	./sources/my_putchar.c			\
 		./sources/termcaps/print_val.c		\
 		./sources/termcaps/right_keys.c		\
 		./sources/termcaps/termcaps.c		\
+		./sources/alias/alias.c			\
+		./sources/alias/my_put_in_list.c	\
+		./sources/alias/new_str.c		\
+		./sources/alias/spe_tab.c		\
+		./sources/alias/my_alias_tab.c		\
+		./sources/alias/my_str_to_wordtab.c	\
+		./sources/alias/source.c		\
 		./sources/main.c
 
 NAME	=	42sh
@@ -62,7 +69,7 @@ CC	=	gcc
 
 COMP	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra
+CFLAGS	=	-W -Wall -Wextra -g3
 
 CFLAGS	+=	-I./include
 

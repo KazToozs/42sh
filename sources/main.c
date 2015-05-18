@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Mon May 18 15:15:11 2015 cristopher toozs-hobson
+** Last update Mon May 18 17:28:13 2015 jules palluau
 */
 
 #include <stdlib.h>
@@ -62,7 +62,10 @@ int		start_up(t_main *m)
   glo.x = 1;
   glo.pid = -2;
   m->ret = 0;
+  m->file = NULL;
   if (make_env(environ) == 1)
+    return (1);
+  if ((m->file = init_alias(m)) == NULL)
     return (1);
   if (manage_signal() == 1)
     return (1);
