@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Tue May  5 10:01:21 2015 Jules Palluau
-** Last update Wed May 20 13:26:59 2015 Quentin Fernandez
+** Last update Wed May 20 17:12:45 2015 cristopher toozs-hobson
 */
 
 #include "alias.h"
@@ -54,22 +54,6 @@ char		*create_alias(char *s, t_alias *alias)
   return (new);
 }
 
-/* int		check_builtal(char *s, t_file *file) */
-/* { */
-/*   char		**tab; */
-  
-/*   if ((tab = my_str_tab(s)) == NULL) */
-/*     return (-1); */
-/*   if (my_strcmp(tab[0], "alias") == 0) */
-/*     file->alias = built_alias(file, s); */
-/*   else if (my_strcmp(tab[0], "export") == 0) */
-/*     built_export(file, s); */
-/*   free_tab(tab); */
-/*   if (file->statement == 1) */
-/*     return (-1); */
-/*   return (0); */
-/* } */
-
 char		*alias(char *s, t_file *file)
 {
   char		*new;
@@ -91,7 +75,5 @@ char		*alias(char *s, t_file *file)
   if ((new = new_line(tab, 0)) == NULL)
     return (NULL);
   free_tab(tab);
-  /* if (check_builtal(s, file) == -1) */
-  /*   return (NULL); */
   return (new);
 }

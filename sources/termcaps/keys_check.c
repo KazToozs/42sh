@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 03:57:33 2015 Quentin Fernandez
-** Last update Wed May 20 16:17:19 2015 Quentin Fernandez
+** Last update Wed May 20 17:10:48 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -139,7 +139,7 @@ int		key_check(t_arg *arg, char *keys)
       arg->str = add_elem_to_list(arg->str, keys);
       print_list(arg, arg->str);
       if ((arg->pos % w.ws_col) == 0)
-	get_down(w.ws_col); 
+	get_down(w.ws_col);
     }
   return (0);
 }

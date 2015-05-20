@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:20:41 2015 Quentin Fernandez
-** Last update Mon May 11 16:13:20 2015 Quentin Fernandez
+** Last update Wed May 20 17:11:11 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -13,7 +13,7 @@
 int		main()
 {
   char		*str;
-  
+
   if (init_term() == -1)
     {
       printf("Nique ta mère\n");

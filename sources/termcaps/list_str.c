@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 10:24:21 2015 Quentin Fernandez
-** Last update Sun May 17 19:28:18 2015 Quentin Fernandez
+** Last update Wed May 20 17:10:59 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -39,7 +39,7 @@ t_str		*add_elem_to_list(t_str *str, char *val)
 t_str		*rm_prev_elem(t_str *str)
 {
   t_str		*tmp;
-  
+
   if (str->prev)
     {
       tmp = str->prev;

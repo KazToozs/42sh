@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 17:52:29 2015 Quentin Fernandez
-** Last update Tue May 19 11:09:40 2015 Quentin Fernandez
+** Last update Wed May 20 17:11:36 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -36,7 +36,7 @@ int			reset_term()
 {
   char			*n_term;
   struct termios	term;
-  
+
   if (!isatty(2))
     return (-1);
   n_term = env_var_val(glo.env, "TERM", 0);

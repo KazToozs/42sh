@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Sun May 10 12:20:19 2015 jules palluau
-** Last update Wed May 20 13:22:04 2015 Quentin Fernandez
+** Last update Wed May 20 17:15:00 2015 cristopher toozs-hobson
 */
 
 #include "alias.h"
@@ -83,12 +83,11 @@ char	*new_strr(char *first, char **second, int x)
 	new[i++] = first[n];
       n++;
     }
-  n = 0;
-  while (second[x] != NULL && second[x][n] != '\0')
+  n = -1;
+  while (second[x] != NULL && second[x][++n] != '\0')
     {
       if (second[x][n] != 39 && second[x][n] != '"')
 	new[i++] = second[x][n];
-      n++;
     }
   if (second[x + 1] != NULL)
     new[i++] = ' ';
