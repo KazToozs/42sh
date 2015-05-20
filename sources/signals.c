@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 21:44:08 2015 cristopher toozs-hobson
-** Last update Wed May 20 11:35:50 2015 Quentin Fernandez
+** Last update Wed May 20 16:55:25 2015 cristopher toozs-hobson
 */
 
 #include <signal.h>
@@ -22,7 +22,7 @@ void		send_sig(int non)
   else if (glo.pid == -2)
     {
       my_putstr_err("\n");
-      display_prompt(2, glo.env);
+      display_prompt(2);
       init_arg();
     }
 }
