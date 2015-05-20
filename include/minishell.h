@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Wed May 20 11:26:05 2015 Quentin Fernandez
+** Last update Wed May 20 14:25:54 2015 cristopher toozs-hobson
 */
 
 #ifndef _SHELL_H_
@@ -37,6 +37,12 @@ typedef struct	s_stat
   char		*mess;
   int		sig;
 }		t_stat;
+
+typedef struct	s_cd
+{
+  char		*mess;
+  int		err;
+}		t_cd;
 
 typedef struct	s_left
 {
@@ -133,6 +139,7 @@ int		quotes(char c, int tru);
 */
 
 int		cd(t_main *m);
+int		my_chdir(char *dir);
 int		cd_tilde(t_main *m);
 int		cd_minus(t_main *m);
 int		cd_ddot(t_main *m);

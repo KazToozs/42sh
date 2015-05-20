@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Mon May 18 17:28:13 2015 jules palluau
+** Last update Wed May 20 15:05:41 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -51,10 +51,12 @@ void		display_prompt(int fd, t_env *env)
     {
       glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
     }
+  my_putstr("\e[96m");
   if (fd == 1)
     my_putstr(pwd);
   if (fd == 2)
     my_putstr_err(pwd);
+  my_putstr("\e[39m");
 }
 
 int		start_up(t_main *m)
@@ -65,6 +67,8 @@ int		start_up(t_main *m)
   m->file = NULL;
   if (make_env(environ) == 1)
     return (1);
+  if (glo.env == NULL)
+    build_env();
   if ((m->file = init_alias(m)) == NULL)
     return (1);
   if (manage_signal() == 1)

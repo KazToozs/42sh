@@ -5,13 +5,28 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Jan 13 09:56:19 2015 cristopher toozs-hobson
-** Last update Thu May 14 12:08:57 2015 cristopher toozs-hobson
+** Last update Wed May 20 14:40:57 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
 #include <limits.h>
+#include <errno.h>
+#include <stdio.h>
 #include "minishell.h"
 #include "my.h"
+
+t_cd		cd_err[] =
+  {
+    {"Permission denied", EACCES},
+    {"Outside accessible address space", EFAULT},
+    {"I/O error occured", EIO},
+    {"Too many symbolic links encountered", ELOOP},
+    {"Path name is too long", ENAMETOOLONG},
+    {"No such file or directory", ENOENT},
+    {"Insufficient memory", ENOMEM},
+    {"No such file or directory", ENOTDIR},
+    {NULL, 0}
+  };
 
 int		special_cd(t_main *m)
 {
@@ -38,6 +53,24 @@ int		special_cd(t_main *m)
   return (1);
 }
 
+int		my_chdir(char *dir)
+{
+  int		i;
+
+  i = 0;
+  if ((chdir(dir)) == -1)
+    {
+      while (errno != cd_err[i].err && cd_err[i].mess != NULL)
+	i++;
+      if (cd_err[i].mess != NULL)
+	fprintf(stderr, "42sh error: %s: %s\n", dir, cd_err[i].mess);
+      else
+	fprintf(stderr, "42sh error: cannot change directory\n");
+      return (-1);
+    }
+  return (0);
+}
+
 int		cd(t_main *m)
 {
   int		ret;
@@ -48,11 +81,8 @@ int		cd(t_main *m)
     return (0);
   else if (ret == 1)
     return (1);
-  if ((chdir(m->word_tab[1])) == -1)
-    {
-      my_putstr_err("No such file or directory\n");
-      return (1);
-    }
+  if ((my_chdir(m->word_tab[1])) == -1)
+    return (1);
   if ((old_pwd = env_var_val(glo.env, "PWD", 0)) == NULL)
     return (1);
   add_env("OLDPWD", old_pwd);

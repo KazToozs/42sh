@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Mar 25 17:45:50 2015 cristopher toozs-hobson
-** Last update Sun May 17 10:22:07 2015 cristopher toozs-hobson
+** Last update Wed May 20 14:25:12 2015 cristopher toozs-hobson
 */
 
 #include	<stdlib.h>
@@ -21,10 +21,9 @@ int		cd_home(t_main *m)
     {
       if ((ret = env_var_val(glo.env , "HOME", 1)) == NULL)
 	return (1);
-      if ((chdir(ret)) == -1)
+      if ((my_chdir(ret)) == -1)
 	{
 	  free(ret);
-	  my_putstr_err("No such file or directory\n");
 	  return (1);
 	}
       if ((ret = env_var_val(glo.env, "PWD", 1)) == NULL)
@@ -47,7 +46,7 @@ int		cd_ddot(t_main *m)
   if (my_strcmp(m->word_tab[0], "cd..") == 0
       || my_strcmp(m->word_tab[0], "..") == 0)
     {
-      if ((chdir("..")) == -1)
+      if ((my_chdir("..")) == -1)
         return (1);
       if ((old_pwd = env_var_val(glo.env, "PWD", 1)) == NULL)
 	return (1);
@@ -77,10 +76,9 @@ int		cd_minus(t_main *m)
     {
       if ((ret = env_var_val(glo.env, "OLDPWD", 1)) == NULL)
 	return (1);
-      if (chdir(ret) == -1)
+      if (my_chdir(ret) == -1)
         {
 	  free(ret);
-          my_putstr_err("Invalid OLDPWD environement variable\n");
           return (1);
         }
       if ((ret = env_var_val(glo.env, "OLDPWD", 1)) == NULL)
@@ -104,10 +102,9 @@ int		cd_tilde(t_main *m)
 	return (1);
       home = my_strcat(ret, "/", 0);
       free(ret);
-      if (chdir(my_strcat(home, m->word_tab[1] + 2, 0)) == -1)
+      if (my_chdir(my_strcat(home, m->word_tab[1] + 2, 0)) == -1)
 	{
 	  free(home);
-	  my_putstr_err("No such file or directory\n");
 	  return (1);
 	}
       if ((ret = env_var_val(glo.env, "PWD", 1)) == NULL)
