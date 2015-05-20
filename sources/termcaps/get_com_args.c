@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 20:42:48 2015 Quentin Fernandez
-** Last update Wed May 20 11:33:01 2015 Quentin Fernandez
+** Last update Wed May 20 13:02:56 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -109,7 +109,7 @@ char		*get_cmd_str()
 	}
     }
   go_to_end(&glo.arg);
-  printf("\n");
+  fprintf(stderr, "\n");
   if (reset_term())
     return (NULL);
   return (arg_to_str(glo.arg.str));

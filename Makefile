@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Tue May 19 10:28:42 2015 pallua
+## Last update Wed May 20 12:55:35 2015 cristopher toozs-hobson
 ##
 
 SRC	=	./sources/my_putchar.c			\
@@ -14,7 +14,6 @@ SRC	=	./sources/my_putchar.c			\
 		./sources/my_strlen.c			\
 		./sources/my_str_tab.c			\
 		./sources/my_strcmp.c			\
-		./sources/my_putstr_err.c		\
 		./sources/my_strcpy.c			\
 		./sources/my_strncpy.c			\
 		./sources/my_strdup.c			\
