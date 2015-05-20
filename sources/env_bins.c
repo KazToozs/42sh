@@ -5,13 +5,13 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Jan 31 00:30:58 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:29:37 2015 cristopher toozs-hobson
+** Last update Wed May 20 16:09:14 2015 Quentin Fernandez
 */
 
 #include "minishell.h"
 #include "my.h"
 
-void		create_env_var(char *value, char *var, t_env *tmp)
+void		create_env_var(char *value, char *var, t_env **tmp)
 {
   char		*new;
   char		**tab;
@@ -25,10 +25,10 @@ void		create_env_var(char *value, char *var, t_env *tmp)
     }
   else
     {
-      glo.env = tmp;
+      glo.env = *tmp;
       new = my_strcat(var, "=", 0);
       new = my_strcat(new, value, 1);
-      my_put_in_list_end(&glo.env, new, &tmp);
+      my_put_in_list_end(&glo.env, new, tmp);
     }
 }
 
@@ -44,7 +44,7 @@ void		add_env(char *var, char *value)
       free_tab(tab);
       glo.env = glo.env->next;
     }
-  create_env_var(value, var, tmp);
+  create_env_var(value, var, &tmp);
   glo.env = tmp;
 }
 

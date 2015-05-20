@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:22:10 2015 Quentin Fernandez
-** Last update Wed May 20 11:26:03 2015 Quentin Fernandez
+** Last update Wed May 20 15:49:55 2015 Quentin Fernandez
 */
 
 #ifndef _TERMCAPS_H_
@@ -94,6 +94,7 @@ extern g_glo	glo;
 
 int		manage_signal();
 char		*env_var_val(t_env *, char *, int);
+void		display_prompt(int fd, t_env *env);
 
 /*
 ** print_val.c

@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 03:57:33 2015 Quentin Fernandez
-** Last update Tue May 19 09:17:23 2015 Quentin Fernandez
+** Last update Wed May 20 16:17:19 2015 Quentin Fernandez
 */
 
 #include "termcaps.h"
@@ -56,6 +56,24 @@ int		del_key_func(t_arg *arg)
   return (0);
 }
 
+int		clear_l_screen(t_arg *arg)
+{
+  int		i;
+  int		old_pos;
+
+  while (arg->str->prev)
+    arg->str = arg->str->prev;
+  put_str(tgetstr("cl", NULL));
+  display_prompt(1, glo.env);
+  old_pos = arg->pos;
+  arg->pos = strlen(glo.prompt);
+  i = arg->pos;
+  print_list(arg, arg->str);
+  while (i++ < old_pos)
+    go_right(arg);
+  return (0);
+}
+
 t_key		func_key[] =
   {
     {BACK_KEYS, del_left},
@@ -66,6 +84,7 @@ t_key		func_key[] =
     {HOME_KEYS, home_of_str},
     {CTRL_A_KEYS, home_of_str},
     {CTRL_E_KEYS, go_to_end},
+    {CTRL_L_KEYS, clear_l_screen},
     {END_KEYS, go_to_end},
     {0, NULL}
   };
@@ -81,6 +100,21 @@ int		is_cmd_key(unsigned char *keys)
   return (0);
 }
 
+void			check_term()
+{
+  static int		col = 0;
+  struct winsize	w;
+
+  ioctl(0, TIOCGWINSZ, &w);
+  if (col == 0)
+    col = w.ws_col;
+  if (col != w.ws_col)
+    {
+      clear_l_screen(&glo.arg);
+      col = w.ws_col;
+    }
+}
+
 int		key_check(t_arg *arg, char *keys)
 {
   long		key;
@@ -89,6 +123,7 @@ int		key_check(t_arg *arg, char *keys)
 
   key = (*(long *)keys);
   i = 0;
+  check_term();
   ioctl(0, TIOCGWINSZ, &w);
   if (is_cmd_key((unsigned char *) keys))
     {
