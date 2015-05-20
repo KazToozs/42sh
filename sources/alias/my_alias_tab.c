@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Sat May 16 11:35:26 2015 jules palluau
-** Last update Sat May 16 13:38:10 2015 jules palluau
+** Last update Wed May 20 13:26:30 2015 Quentin Fernandez
 */
 
 #include "alias.h"
@@ -19,11 +19,11 @@ int		counts_word(char *str)
   cpt = 0;
   while (str[i] != '\0')
     {
-      if (str[i] >= 33 && str[i] <= 126 && str[i] != '"')
+      if (str[i] && str[i] != '\t' && str[i] != ' ' && str[i] != '"')
         {
           cpt++;
-          while ((str[i] && str[i] >= 33 && str[i] <= 126) && str[i] != '"')
-            i++;
+          while ((str[i] && str[i] != '\t' && str[i] != ' ' && str[i] != '"'))
+	    i++;
         }
       else
         i++;
@@ -36,7 +36,7 @@ int		counts_char(char *str, int *i)
   int		cpt;
 
   cpt = 0;
-  while (str[*i] && (str[*i] >= 33 && str[*i] <= 126) && str[*i] != '"')
+  while (str[*i] && str[*i] != '\t' && str[*i] != ' ' && str[*i] != '"')
     {
       cpt++;
       *i = *i + 1;
@@ -58,7 +58,7 @@ char		**my_alias_tab(char *str)
     return (NULL);
   while (str[i] && words > 0)
     {
-      if (str[i] >= 33 && str[i] <= 126 && str[i] != '"')
+      if ((str[i] && str[i] != '\t' && str[i] != ' ' && str[i] != '"'))
         {
           if ((tab[size] = my_strdup(str + i)) == NULL)
             return (NULL);
