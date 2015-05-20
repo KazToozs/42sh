@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 03:57:33 2015 Quentin Fernandez
-** Last update Mon May 18 13:54:57 2015 cristopher toozs-hobson
+** Last update Tue May 19 09:17:23 2015 Quentin Fernandez
 */
 
 #include "termcaps.h"
@@ -80,24 +80,6 @@ int		is_cmd_key(unsigned char *keys)
     }
   return (0);
 }
-/*
-void			check_term(t_arg *arg)
-{
-  static int		col = 0;
-  struct winsize	w;
-  int			i;
-
-  ioctl(0, TIOCGWINSZ, &w);
-  col = (col) ? col : w.ws_col;
-  if (col != w.ws_col)
-    {
-      i = 0;
-      while (i++ < (arg->pos / col))
-	put_str(tgetstr("up", NULL));
-      i = 0;
-      while ()
-	}
-	}*/
 
 int		key_check(t_arg *arg, char *keys)
 {
@@ -119,10 +101,10 @@ int		key_check(t_arg *arg, char *keys)
     {
       arg->size++;
       arg->pos++;
-      if ((arg->pos % w.ws_col) == 0)
-	get_down(w.ws_col);
       arg->str = add_elem_to_list(arg->str, keys);
       print_list(arg, arg->str);
+      if ((arg->pos % w.ws_col) == 0)
+	get_down(w.ws_col); 
     }
   return (0);
 }

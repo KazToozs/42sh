@@ -5,12 +5,13 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Nov  3 10:09:14 2014 cristopher toozs-hobson
-** Last update Mon May 18 18:07:56 2015 cristopher toozs-hobson
+** Last update Mon May 18 15:09:39 2015 cristopher toozs-hobson
 */
 
-#include "alias.h"
+#include <stdlib.h>
+#include "my.h"
 
-int		count_word(char *str)
+int		count_words(char *str)
 {
   int		i;
   int		cpt;
@@ -19,12 +20,11 @@ int		count_word(char *str)
   cpt = 0;
   while (str[i] != '\0')
     {
-      if (str[i] >= 33 && str[i] <= 126
-	  && str[i] != '=' && str[i] != '"')
+      if (str[i] != ':' && str[i] != '=' && str[i] != '"' && str[i] != ' ')
 	{
 	  cpt++;
-	  while ((str[i] && str[i] >= 33 && str[i] <= 126)
-		 && str[i] != '=' && str[i] != '"')
+	  while (str[i] != '\0' && str[i] != ':' && str[i] != '='
+		 && str[i] != ' ' && str[i] != '"')
 	    i++;
 	}
       else
@@ -33,13 +33,13 @@ int		count_word(char *str)
   return (cpt);
 }
 
-int		count_char(char *str, int *i)
+int		count_chars(char *str, int *i)
 {
   int		cpt;
 
   cpt = 0;
-  while (str[*i] && (str[*i] >= 33 && str[*i] <= 126
-		     && str[*i] != '=') && str[*i] != '"')
+  while (str[*i] && str[*i] != ':' && str[*i] != '=' && str[*i] != ' '
+	 && str[*i] != '"')
     {
       cpt++;
       *i = *i + 1;
@@ -47,7 +47,7 @@ int		count_char(char *str, int *i)
   return (cpt);
 }
 
-char		**my_str_to_wordtab(char *str)
+char		**my_str_tab(char *str)
 {
   int		i;
   int		words;
@@ -56,17 +56,16 @@ char		**my_str_to_wordtab(char *str)
 
   i = 0;
   size = 0;
-  words = count_word(str);
+  words = count_words(str);
   if ((tab = malloc(sizeof(char *) * (words + 1))) == NULL)
     return (NULL);
   while (str[i] && words > 0)
     {
-      if (str[i] >= 33 && str[i] <= 126
-	  && str[i] != '=' && str[i] != '"')
+      if (str[i] != ':' && str[i] != '=' && str[i] != '"' && str[i] != ' ')
 	{
 	  if ((tab[size] = my_strdup(str + i)) == NULL)
 	    return (NULL);
-	  tab[size++] [count_char(str, &i)] = '\0';
+	  tab[size++] [count_chars(str, &i)] = '\0';
 	  words = words - 1;
 	}
       else

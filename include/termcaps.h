@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:22:10 2015 Quentin Fernandez
-** Last update Mon May 18 14:12:51 2015 cristopher toozs-hobson
+** Last update Wed May 20 11:26:03 2015 Quentin Fernandez
 */
 
 #ifndef _TERMCAPS_H_
@@ -53,6 +53,7 @@
 typedef struct s_str	t_str;
 typedef struct s_arg	t_arg;
 typedef struct s_key	t_key;
+typedef struct s_env	t_env;
 typedef	int	(*t_func_k)(t_arg *);
 
 struct		s_str
@@ -78,9 +79,9 @@ struct		s_key
 typedef struct  s_glo
 {
   struct s_env  *env;
+  t_arg		arg;
   pid_t         pid;
   pid_t         gpid;
-  int           fg;
   int           x;
   char          *prompt;
 }               g_glo;
@@ -90,6 +91,9 @@ extern g_glo	glo;
 /*
 ** Prototypes
 */
+
+int		manage_signal();
+char		*env_var_val(t_env *, char *, int);
 
 /*
 ** print_val.c
@@ -154,5 +158,6 @@ int		key_check(t_arg *, char *);
 
 char		*get_cmd_str();
 char		*arg_to_str(t_str *str);
+int		init_arg();
 
 #endif /*_TERMCAPS_H_*/

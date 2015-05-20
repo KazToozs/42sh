@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Mon May  4 15:26:38 2015 Jules Palluau
-** Last update Mon May 18 17:24:25 2015 jules palluau
+** Last update Tue May 19 10:27:20 2015 pallua
 */
 
 #ifndef ALIAS_H_
@@ -56,6 +56,7 @@ typedef struct		s_file
 */
 
 t_alias	*my_put_alias_list(t_alias *list, char *src, char *end);
+void	delete_node(t_alias **list);
 char	**my_str_to_wordtab(char *str);
 char	**my_alias_tab(char *str);
 int	tablen(char **tab);
