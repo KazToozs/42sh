@@ -5,11 +5,12 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Wed May 20 16:18:32 2015 Quentin Fernandez
+** Last update Wed May 20 16:31:33 2015 Quentin Fernandez
 */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 #include "my.h"
 #include "minishell.h"
 
@@ -42,7 +43,8 @@ void		display_prompt(int fd, t_env *env)
 
   if ((pwd = env_var_val(env, "PWD", 0)) != NULL)
     {
-      pwd = put_pwd(pwd);
+      if ((pwd = getcwd(pwd, PATH_MAX)))
+	pwd = put_pwd(pwd);
       pwd = my_strcat("42sh[", pwd, 2);
       pwd = my_strcat(pwd, "]$> ", 1);
       glo.prompt = my_strdup(pwd);
