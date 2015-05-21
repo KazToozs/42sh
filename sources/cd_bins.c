@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Mar 25 17:45:50 2015 cristopher toozs-hobson
-** Last update Wed May 20 16:29:46 2015 Quentin Fernandez
+** Last update Thu May 21 15:19:18 2015 cristopher toozs-hobson
 */
 
 #include	<stdlib.h>
@@ -26,9 +26,9 @@ int		cd_home(t_main *m)
 	  free(ret);
 	  return (1);
 	}
-      if ((ret = env_var_val(glo.env, "PWD", 1)) == NULL)
-	return (1);
-      add_env("OLDPWD", ret);
+      ret = env_var_val(glo.env, "PWD", 1);
+      if (ret != NULL)
+	add_env("OLDPWD", ret);
       if ((ret = env_var_val(glo.env, "HOME", 1)) == NULL)
 	return (1);
       add_env("PWD", ret);
@@ -43,6 +43,7 @@ int		cd_ddot(t_main *m)
   char		*old_pwd;
   int		i;
 
+  old_pwd = NULL;
   if (my_strcmp(m->word_tab[0], "cd..") == 0
       || my_strcmp(m->word_tab[0], "..") == 0)
     {
@@ -68,7 +69,8 @@ int		cd_minus(t_main *m)
   char		*pwd;
   char		*ret;
 
-  if ((ret = env_var_val(glo.env, "PWD", 0)) == NULL)
+  ret = NULL;
+  if ((ret = getcwd(ret, PATH_MAX)) == NULL)
     return (1);
   if ((pwd = my_strdup(ret)) == NULL)
     return (1);
@@ -81,7 +83,7 @@ int		cd_minus(t_main *m)
 	  free(ret);
           return (1);
         }
-      if ((ret = env_var_val(glo.env, "OLDPWD", 1)) == NULL)
+      if ((ret = getcwd(ret, PATH_MAX)) == NULL)
 	return (1);
       add_env("PWD", ret);
       add_env("OLDPWD", pwd);
@@ -113,6 +115,7 @@ int		cd_tilde(t_main *m)
       if ((new_pwd = getcwd(new_pwd, PATH_MAX)) == NULL)
 	return (1);
       add_env("PWD", new_pwd);
+      add_env("OLDPWD", ret);
       return (0);
     }
   return (-1);

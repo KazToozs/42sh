@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Tue May  5 10:01:21 2015 Jules Palluau
-** Last update Wed May 20 17:12:45 2015 cristopher toozs-hobson
+** Last update Thu May 21 13:55:17 2015 cristopher toozs-hobson
 */
 
 #include "alias.h"
@@ -15,8 +15,7 @@ t_file		*init_alias(t_main *m)
   if ((m->file = malloc(sizeof(t_file))) == NULL)
     return (NULL);
   m->file->alias = NULL;
-  if ((m->file->fd = open(ALIAS_FILE, O_CREAT | O_RDWR,
-		       00644)) == -1)
+  if ((m->file->fd = open(ALIAS_FILE, O_CREAT | O_RDWR, 00644)) == -1)
     return (NULL);
   m->file->statement = 0;
   m->file->alias = source(m);

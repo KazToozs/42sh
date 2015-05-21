@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Mon May 18 18:07:02 2015 cristopher toozs-hobson
+** Last update Thu May 21 14:19:59 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -36,7 +36,6 @@ char		*find_function(char *path, char *function)
     {
       tab = my_str_tab(path);
       tab = add_slash(tab);
-      free(tab[0]);
     }
   if (function == NULL)
     return (function);
@@ -60,7 +59,7 @@ int		execute(char *path, int i, t_main *m)
       check = execute_fork(m->word_tab, glo.env, m);
       return (check);
     }
-  else if (m->word_tab)
+  else if (m->word_tab && m->word_tab[0])
     {
       my_putstr_err("Unknown command\n");
       return (1);
@@ -75,19 +74,23 @@ int		execute_function(char *ret, t_main *m)
   int		check;
 
   i = 0;
-  m->file->exp = my_strdup(ret);
-  if ((ret = alias(ret, m->file)) == NULL)
-    return (1);
-  m->word_tab = my_str_tab(ret);
-  path = find_var(glo.env, "PATH");
-  while (ret[0] != '\0' && g_bin[i].str != NULL
-         && (my_strcmp(m->word_tab[0], g_bin[i].str) != 0))
-    i++;
-  if ((m->word_tab = globbing(m->word_tab)) == NULL)
+  if (ret && ret[0])
     {
-      return (1);
+      m->file->exp = my_strdup(ret);
+      if ((ret = alias(ret, m->file)) == NULL)
+	return (1);
+      m->word_tab = my_str_tab(ret);
+      path = find_var(glo.env, "PATH");
+      while (ret[0] != '\0' && g_bin[i].str != NULL
+	     && (my_strcmp(m->word_tab[0], g_bin[i].str) != 0))
+	i++;
+      if ((m->word_tab = globbing(m->word_tab)) == NULL)
+	{
+	  return (1);
+	}
+      check = execute(path, i, m);
+      free_tab(m->word_tab);
+      return (check);
     }
-  check = execute(path, i, m);
-  free_tab(m->word_tab);
-  return (check);
+  return (1);
 }

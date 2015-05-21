@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Wed May 20 16:55:46 2015 cristopher toozs-hobson
+** Last update Thu May 21 14:36:11 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -109,5 +109,6 @@ int		main()
       display_prompt(1);
       free(ret);
     }
+  my_putstr_err("exit\n");
   return (0);
 }

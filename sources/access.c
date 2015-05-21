@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Apr 27 16:33:28 2015 cristopher toozs-hobson
-** Last update Sun May 17 12:06:00 2015 cristopher toozs-hobson
+** Last update Thu May 21 14:19:54 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
@@ -50,14 +50,16 @@ char		*check_access(char **tab, char *function)
   char		*ret;
   int		i;
 
-  i = 1;
+  i = 0;
   if (check_slash(function) == 1)
     {
       if (access(function, F_OK) == 0)
         {
-          while (tab && tab[++i] != NULL)
-            free(tab[i]);
-          free(tab);
+          while (tab && tab[++i])
+	    if (i != 1)
+	      free(tab[i]);
+	  if (tab)
+	    free(tab);
           return (function);
         }
     }

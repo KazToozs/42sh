@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 19:00:11 2015 cristopher toozs-hobson
-** Last update Wed May 20 12:55:59 2015 cristopher toozs-hobson
+** Last update Thu May 21 13:13:54 2015 cristopher toozs-hobson
 */
 
 #include "my.h"
@@ -23,7 +23,7 @@ int		dbl_left_read(t_left *l)
       i++;
       if ((l->tab = my_realloc_tab(l->tab, i)) == NULL)
 	return (1);
-      my_putstr_err("> ");
+      my_putstr_in("> ");
     }
   if (l->tab[i - 1] == NULL)
     return (1);

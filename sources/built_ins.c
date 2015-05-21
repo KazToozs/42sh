@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Jan 13 09:56:19 2015 cristopher toozs-hobson
-** Last update Wed May 20 14:40:57 2015 cristopher toozs-hobson
+** Last update Thu May 21 15:00:15 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -77,15 +77,16 @@ int		cd(t_main *m)
   char		*old_pwd;
   char		*new_pwd;
 
+  old_pwd = NULL;
   if ((ret = special_cd(m)) == 0)
     return (0);
   else if (ret == 1)
     return (1);
   if ((my_chdir(m->word_tab[1])) == -1)
     return (1);
-  if ((old_pwd = env_var_val(glo.env, "PWD", 0)) == NULL)
-    return (1);
-  add_env("OLDPWD", old_pwd);
+  old_pwd = env_var_val(glo.env, "PWD", 0);
+  if (old_pwd != NULL)
+    add_env("OLDPWD", old_pwd);
   new_pwd = NULL;
   if ((new_pwd = getcwd(new_pwd, PATH_MAX)) == NULL)
     return (1);

@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Thu Dec  4 11:12:29 2014 cristopher toozs-hobson
-** Last update Wed May 20 12:55:06 2015 cristopher toozs-hobson
+** Last update Thu May 21 13:13:09 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
@@ -30,4 +30,11 @@ void    my_putstr_err(char *str)
   if (str == NULL)
     return ;
   write(2, (unsigned char *)str, my_strlen(str));
+}
+
+void    my_putstr_in(char *str)
+{
+  if (str == NULL)
+    return ;
+  write(0, (unsigned char *)str, my_strlen(str));
 }

@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri Oct 10 14:21:53 2014 cristopher toozs-hobson
-** Last update Sun May 17 12:49:07 2015 cristopher toozs-hobson
+** Last update Thu May 21 13:13:31 2015 cristopher toozs-hobson
 */
 
 #ifndef _LIB_MY_
@@ -22,6 +22,7 @@ int		my_strncmp(char *s1, char *s2, int n);
 int		my_getnbr(char *str);
 char		*my_strcat(char *first, char *second, int free);
 void		my_putstr_err(char *str);
+void		my_putstr_in(char *str);
 char		*my_strcpy(char *dest, char *src);
 char		*my_strncpy(char *dest, char *src, int n);
 void		my_put_nbr(int nb);
