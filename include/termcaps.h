@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:22:10 2015 Quentin Fernandez
-** Last update Wed May 20 15:49:55 2015 Quentin Fernandez
+** Last update Wed May 20 21:00:10 2015 Quentin Fernandez
 */
 
 #ifndef _TERMCAPS_H_
@@ -112,14 +112,15 @@ void		print_list_del(t_arg *, t_str *);
 t_str		*add_elem_to_list(t_str *, char *);
 t_str		*rm_prev_elem(t_str *);
 t_str		*rm_to_next_elem(t_str *);
+t_str		*free_all_list(t_str *);
 
 /*
 ** termcaps.c
 */
 
+void		check_term();
 int		init_term();
 int		reset_term();
-int		go_to_end(t_arg *arg);
 
 /*
 ** pos_func.c
@@ -127,6 +128,23 @@ int		go_to_end(t_arg *arg);
 
 void		save_pos();
 void		load_pos();
+int		home_of_str(t_arg *);
+int		go_to_end(t_arg *);
+
+/*
+** ctrl_func.c
+*/
+
+int		clear_l_screen(t_arg *arg);
+int		left_word(t_arg *);
+int		right_word(t_arg *);
+
+/*
+** del_func.c
+*/
+
+int		ctrl_d_key(t_arg *);
+int		del_key_func(t_arg *);
 
 /*
 ** left_keys.c

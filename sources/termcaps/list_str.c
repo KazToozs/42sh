@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 10:24:21 2015 Quentin Fernandez
-** Last update Wed May 20 17:10:59 2015 cristopher toozs-hobson
+** Last update Wed May 20 20:05:45 2015 Quentin Fernandez
 */
 
 #include "termcaps.h"
@@ -70,4 +70,13 @@ t_str		*rm_to_next_elem(t_str *str)
     }
   else
     return (NULL);
+}
+
+t_str		*free_all_list(t_str *str)
+{
+  while (str->next)
+    str = rm_to_next_elem(str);
+  free(str->val);
+  free(str);
+  return (NULL);
 }

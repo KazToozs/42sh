@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Wed May 20 12:55:35 2015 cristopher toozs-hobson
+## Last update Wed May 20 20:59:41 2015 Quentin Fernandez
 ##
 
 SRC	=	./sources/my_putchar.c			\
@@ -53,6 +53,8 @@ SRC	=	./sources/my_putchar.c			\
 		./sources/termcaps/print_val.c		\
 		./sources/termcaps/right_keys.c		\
 		./sources/termcaps/termcaps.c		\
+		./sources/termcaps/del_func.c		\
+		./sources/termcaps/ctrl_func.c		\
 		./sources/alias/alias.c			\
 		./sources/alias/my_put_in_list.c	\
 		./sources/alias/new_str.c		\

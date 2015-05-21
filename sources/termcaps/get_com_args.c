@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 20:42:48 2015 Quentin Fernandez
-** Last update Wed May 20 13:02:56 2015 cristopher toozs-hobson
+** Last update Wed May 20 20:07:04 2015 Quentin Fernandez
 */
 
 #include "termcaps.h"
@@ -51,15 +51,6 @@ int		check_enter(long c)
       i += 8;
     }
  return (1);
-}
-
-t_str		*free_all_list(t_str *str)
-{
-  while (str->next)
-      str = rm_to_next_elem(str);
-  free(str->val);
-  free(str);
-  return (NULL);
 }
 
 int		init_arg()

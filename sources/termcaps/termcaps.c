@@ -5,10 +5,25 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 17:52:29 2015 Quentin Fernandez
-** Last update Wed May 20 17:11:36 2015 cristopher toozs-hobson
+** Last update Wed May 20 21:00:47 2015 Quentin Fernandez
 */
 
 #include "termcaps.h"
+
+void			check_term()
+{
+  static int		col = 0;
+  struct winsize	w;
+
+  ioctl(0, TIOCGWINSZ, &w);
+  if (col == 0)
+    col = w.ws_col;
+  if (col != w.ws_col)
+    {
+      clear_l_screen(&glo.arg);
+      col = w.ws_col;
+    }
+}
 
 int			init_term()
 {
