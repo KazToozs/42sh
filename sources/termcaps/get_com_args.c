@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 20:42:48 2015 Quentin Fernandez
-** Last update Wed May 20 20:07:04 2015 Quentin Fernandez
+** Last update Thu May 21 10:35:15 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -84,6 +84,7 @@ long		get_keys()
 char		*get_cmd_str()
 {
   long		keys;
+  char		*ret;
 
   if (init_term())
     return (get_next_line(0));
@@ -103,5 +104,7 @@ char		*get_cmd_str()
   fprintf(stderr, "\n");
   if (reset_term())
     return (NULL);
-  return (arg_to_str(glo.arg.str));
+  ret = arg_to_str(glo.arg.str);
+  glo.arg.str = free_all_list(glo.arg.str);
+  return (ret);
 }

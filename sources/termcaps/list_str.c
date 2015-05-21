@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 10:24:21 2015 Quentin Fernandez
-** Last update Wed May 20 20:05:45 2015 Quentin Fernandez
+** Last update Thu May 21 10:24:45 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -15,9 +15,12 @@ t_str		*add_elem_to_list(t_str *str, char *val)
   t_str		*new;
 
   if (!(new = malloc(sizeof(t_str))))
-    return (NULL);
+    return (str);
   if (val)
-    new->val = strdup(val);
+    {
+      if (!(new->val = strdup(val)))
+	return (str);
+    }
   else
     new->val = NULL;
   if (str)
