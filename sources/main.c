@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Thu May 21 14:36:11 2015 cristopher toozs-hobson
+** Last update Thu May 21 18:27:34 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -42,6 +42,7 @@ void		display_prompt(int fd)
   char		*pwd;
 
   pwd = NULL;
+  glo.prompt = NULL;
   if ((pwd = getcwd(pwd, PATH_MAX)) != NULL)
     {
       pwd = put_pwd(pwd);
@@ -49,17 +50,19 @@ void		display_prompt(int fd)
       pwd = my_strcat(pwd, "]$> ", 1);
       glo.prompt = my_strdup(pwd);
     }
-  else
+  if (glo.prompt)
     {
-      glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
+      my_putstr("\e[96m");
+      if (fd == 1)
+	my_putstr(glo.prompt);
+      if (fd == 2)
+	my_putstr_err(glo.prompt);
+      my_putstr("\e[39m");
     }
-  my_putstr("\e[96m");
-  if (fd == 1)
-    my_putstr(glo.prompt);
-  if (fd == 2)
-    my_putstr_err(glo.prompt);
-  my_putstr("\e[39m");
+  else
+    glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
 }
+
 
 int		start_up(t_main *m)
 {
@@ -100,7 +103,7 @@ int		main()
     return (1);
   while ((ret = get_cmd_str()) != NULL)
     {
-      if ((check = my_shell(ret, &m)) != -3)
+      if ((check = my_shell(ret, &m)) != -4)
 	{
 	  free(ret);
 	  free_env(glo.env);

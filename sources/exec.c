@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Thu May 21 14:19:59 2015 cristopher toozs-hobson
+** Last update Thu May 21 17:01:58 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -76,7 +76,8 @@ int		execute_function(char *ret, t_main *m)
   i = 0;
   if (ret && ret[0])
     {
-      m->file->exp = my_strdup(ret);
+      if ((m->file->exp = my_strdup(ret)) == NULL)
+	return (1);
       if ((ret = alias(ret, m->file)) == NULL)
 	return (1);
       m->word_tab = my_str_tab(ret);

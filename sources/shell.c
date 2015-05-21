@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  1 11:50:46 2015 cristopher toozs-hobson
-** Last update Mon May 18 14:57:01 2015 cristopher toozs-hobson
+** Last update Thu May 21 18:28:00 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -69,7 +69,7 @@ int		my_shell(char *ret, t_main *m)
     {
       my_putstr_err("Invalid syntax\n");
       m->ret = 1;
-      return (-3);
+      return (-4);
     }
-  return (-3);
+  return (-4);
 }
