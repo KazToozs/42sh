@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Sun May 10 20:03:02 2015 jules palluau
-** Last update Thu May 21 11:02:24 2015 jules palluau
+** Last update Thu May 21 16:30:11 2015 jules palluau
 */
 
 #include "alias.h"
@@ -20,11 +20,8 @@ int		built_alias(t_main *m)
       m->file->statement = 1;
       return (1);
     }
-  if (tablen(tab) < 3)
-    {
-      printf("Alias error\n");
-      return (1);
-    }
+  if (alias_err(m->file->alias, tab) != 0)
+    return (1);
   if ((ne = new_line(tab, 2)) == NULL)
     {
       m->file->statement = 1;

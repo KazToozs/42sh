@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 **
 ** Started on  Tue Dec  2 14:17:15 2014 jules palluau
-** Last update Tue May 19 10:53:10 2015 pallua
+** Last update Thu May 21 16:18:57 2015 jules palluau
 */
 
 #include "alias.h"
@@ -28,6 +28,21 @@ t_alias		*my_free(t_alias *list, char *s)
   return (tmp);
 }
 
+int		my_check(char *s, char *end)
+{
+  if (my_strcmp(s, end) == 0)
+    {
+      fprintf(stderr, "Alias loop!\n");
+      return (1);
+    }
+  if (my_strcmp(s, "alias") == 0)
+    {
+      fprintf(stderr, "Too dangerous alias!\n");
+      return (1);
+    }
+  return (0);
+}
+
 t_alias		*my_put_alias_list(t_alias *list, char *s, char *end)
 {
   t_alias	*elem;
@@ -39,6 +54,8 @@ t_alias		*my_put_alias_list(t_alias *list, char *s, char *end)
   elem->next = NULL;
   elem->src = strdup(s);
   elem->new = strdup(end);
+  if (my_check(s, end) != 0)
+    return (list);
   if (list == NULL)
     return (elem);
   list = my_free(list, s);

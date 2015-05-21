@@ -1,14 +1,4 @@
-
-
-
-alias lol='echo pd'
-
-
+alias lol='ls'
 alias tamere='xD'
-
-
-alias xD='ls'
-
-
-
+alias xD='lol'
 alias ne='emacs -nw'

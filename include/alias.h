@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Mon May  4 15:26:38 2015 Jules Palluau
-** Last update Thu May 21 10:41:34 2015 jules palluau
+** Last update Thu May 21 16:29:15 2015 jules palluau
 */
 
 #ifndef ALIAS_H_
@@ -62,5 +62,7 @@ char	**my_alias_tab(char *str);
 int	tablen(char **tab);
 char	*alias(char *s, t_file *file);
 char	*new_line(char **tab, int x);
+int	aff_alias(t_alias *alias);
+int	alias_err(t_alias *alias, char **tab);
 
 #endif /* !ALIAS_H_ */

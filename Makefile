@@ -5,7 +5,7 @@
 ## Login   <toozs-_c@epitech.net>
 ## 
 ## Started on  Wed Oct 29 15:09:44 2014 cristopher toozs-hobson
-## Last update Wed May 20 20:59:41 2015 Quentin Fernandez
+## Last update Thu May 21 16:24:52 2015 jules palluau
 ##
 
 SRC	=	./sources/my_putchar.c			\
@@ -63,6 +63,7 @@ SRC	=	./sources/my_putchar.c			\
 		./sources/alias/my_str_to_wordtab.c	\
 		./sources/alias/source.c		\
 		./sources/alias/delete_node.c		\
+		./sources/alias/aff_alias.c		\
 		./sources/main.c
 
 NAME	=	42sh
