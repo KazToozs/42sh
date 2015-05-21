@@ -5,7 +5,7 @@
 ** Login   <msa_m@epitech.net>
 ** 
 ** Started on  Mon May 11 08:35:43 2015 msa_m
-** Last update Wed May 20 11:20:20 2015 msa_m
+** Last update Thu May 21 10:49:35 2015 cristopher toozs-hobson
 */
 
 #include "test.h"
@@ -20,6 +20,8 @@ int	name_trace(t_data *d)
     {
       my_putstr("Are you sure ? The trace already exist.(y\\n)\n", 1);
       conf = get_next_line(0);
+      if(conf == NULL)
+	return (EXIT_FAILURE);
       if (conf[0] == 'y')
 	{
 	  if ((d->fd_file = open(trace, O_CREAT | O_TRUNC | O_WRONLY,
@@ -28,10 +30,12 @@ int	name_trace(t_data *d)
 	}
       else
 	return (EXIT_FAILURE);
+      free(conf);
     }
   else if ((d->fd_file = open(trace, O_CREAT | O_APPEND | O_WRONLY,
 			      0666)) == -1)
     return (my_error("Error: Open failed\n"));
+  free(trace);
   return (EXIT_SUCCESS);
 }
 
