@@ -1,0 +1,5 @@
+touch test01 ; ls
+>> test01 echo "Exotique double droite"
+cat test01 ; rm test01
+echo "Texte rajouté grace au double droite" >> test01
+cat test01 ; rm test01 ; ls

@@ -1,0 +1,4 @@
+> test01 echo "Exotique Droite" ; cat test01
+echo "Droite Basique" > test02 ; cat test02
+ls ; rm -f test01 ; rm -f test02
+ls
