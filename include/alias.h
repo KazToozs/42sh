@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Mon May  4 15:26:38 2015 Jules Palluau
-** Last update Tue May 19 10:27:20 2015 pallua
+** Last update Thu May 21 10:41:34 2015 jules palluau
 */
 
 #ifndef ALIAS_H_

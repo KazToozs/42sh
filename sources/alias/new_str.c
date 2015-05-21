@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Sun May 10 12:20:19 2015 jules palluau
-** Last update Wed May 20 17:15:00 2015 cristopher toozs-hobson
+** Last update Thu May 21 10:41:43 2015 jules palluau
 */
 
 #include "alias.h"
@@ -17,8 +17,11 @@ void	reset(int *norm, int *simple, int *doub)
   (*doub) = 0;
 }
 
-int	condition(char *str, int x, int *doub, int *simple)
+int	condition(char *str, int *doub, int *simple)
 {
+  int	x;
+
+  x = -1;
   while (str[++x])
     {
       if (str[x] == 39)
@@ -37,12 +40,10 @@ int	condition(char *str, int x, int *doub, int *simple)
 
 int		check_quote(char *str, char *tab)
 {
-  int		x;
   static int	simple = 0;
   static int	doub = 0;
   static int	norm = 0;
 
-  x = -1;
   if (str == NULL)
     {
       if (++norm > 1)
@@ -58,7 +59,7 @@ int		check_quote(char *str, char *tab)
       reset(&norm, &simple, &doub);
       return (1);
     }
-  if (condition(str, x, &doub, &simple) != 0)
+  if (condition(str, &doub, &simple) != 0)
     {
       reset(&norm, &simple, &doub);
       return (1);

@@ -5,7 +5,7 @@
 ** Login   <pallua_j@epitech.net>
 ** 
 ** Started on  Sun May 10 20:03:02 2015 jules palluau
-** Last update Tue May 19 10:20:43 2015 pallua
+** Last update Thu May 21 11:02:24 2015 jules palluau
 */
 
 #include "alias.h"
@@ -64,6 +64,20 @@ int	built_export(t_main *m)
   return (0);
 }
 
+void		check_in_file(t_main *m, char **tab, char *s)
+{
+  if (my_strcmp(tab[0], "alias") == 0)
+    {
+      m->file->exp = s;
+      built_alias(m);
+    }
+  else if (my_strcmp(tab[0], "export") == 0)
+    {
+      m->file->exp = s;
+      built_export(m);
+    }
+}
+
 t_alias		*source(t_main *m)
 {
   char		*s;
@@ -78,16 +92,7 @@ t_alias		*source(t_main *m)
 	      m->file->statement = 1;
 	      return (NULL);
 	    }
-	  if (my_strcmp(tab[0], "alias") == 0)
-	    {
-	      m->file->exp = s;
-	      built_alias(m);
-	    }
-	  else if (my_strcmp(tab[0], "export") == 0)
-	    {
-	      m->file->exp = s;
-	      built_export(m);
-	    }
+	  check_in_file(m, tab, s);
 	  free(s);
 	  free_tab(tab);
 	  if (m->file->statement == 1)
