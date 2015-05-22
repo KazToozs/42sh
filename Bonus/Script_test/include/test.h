@@ -5,7 +5,7 @@
 ** Login   <msa_m@epitech.net>
 ** 
 ** Started on  Mon May 11 17:57:19 2015 msa_m
-** Last update Tue May 19 13:59:06 2015 msa_m
+** Last update Thu May 21 11:39:35 2015 msa_m
 */
 
 #ifndef TEST_H_
@@ -23,22 +23,6 @@
 #include <fcntl.h>
 
 /*
-** Prototype
-*/
-
-void	my_putchar(char n, int fd);
-void	my_putstr(char *str, int fd);
-void	my_putnbr(int nb, int fd);
-void	free_tab(char **tab);
-int	all_test(char *ex, char **env, char *test);
-int	my_error(char *str);
-int	my_strlen(char *str);
-char	*my_strdup(char *src);
-char	*my_strcpy(char *dest, char *src);
-char	*get_next_line(const int fd);
-char	**my_str_tab(char *str);
-
-/*
 ** Structure
 */
 
@@ -49,5 +33,22 @@ typedef struct	s_data
   int		stdout_cpy;
   int		stdin_cpy;
 }		t_data;
+
+/*
+** Prototype
+*/
+
+void	my_putchar(char n, int fd);
+void	my_putstr(char *str, int fd);
+void	my_putnbr(int nb, int fd);
+void	free_tab(char **tab);
+int	name_trace(t_data *d);
+int	all_test(char *ex, char **env, char *test);
+int	my_error(char *str);
+int	my_strlen(char *str);
+char	*my_strdup(char *src);
+char	*my_strcpy(char *dest, char *src);
+char	*get_next_line(const int fd);
+char	**my_str_tab(char *str);
 
 #endif /* !TEST_H_ */

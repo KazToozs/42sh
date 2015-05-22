@@ -5,12 +5,13 @@
 ## Login   <msa_m@epitech.net>
 ## 
 ## Started on  Mon May 11 18:27:36 2015 msa_m
-## Last update Wed May 20 07:45:24 2015 msa_m
+## Last update Fri May 22 20:43:48 2015 msa_m
 ##
 
 NAME	=	script
 
 SRC	=	src/test.c		\
+		src/name_file.c		\
 		src/main.c		\
 		src/get_next_line.c	\
 		src/my_str_to_wordtab.c	\
@@ -26,7 +27,6 @@ OBJ	=	$(SRC:.c=.o)
 CC	=	gcc
 
 CFLAGS	+=	-W -Wall -Wextra
-CFLAGS	+=	-g3
 CFLAGS	+=	-I./include
 
 all	:	$(NAME)

@@ -5,39 +5,10 @@
 ** Login   <msa_m@epitech.net>
 ** 
 ** Started on  Mon May 11 08:35:43 2015 msa_m
-** Last update Thu May 21 10:49:35 2015 cristopher toozs-hobson
+** Last update Thu May 21 11:31:07 2015 msa_m
 */
 
 #include "test.h"
-
-int	name_trace(t_data *d)
-{
-  char	*trace;
-  char	*conf;
-
-  my_putstr("How you want to call the trace ?\n", 1);
-  if (access(trace = get_next_line(0), F_OK) == 0)
-    {
-      my_putstr("Are you sure ? The trace already exist.(y\\n)\n", 1);
-      conf = get_next_line(0);
-      if(conf == NULL)
-	return (EXIT_FAILURE);
-      if (conf[0] == 'y')
-	{
-	  if ((d->fd_file = open(trace, O_CREAT | O_TRUNC | O_WRONLY,
-				 0666)) == -1)
-	    return (my_error("Error: Open failed\n"));
-	}
-      else
-	return (EXIT_FAILURE);
-      free(conf);
-    }
-  else if ((d->fd_file = open(trace, O_CREAT | O_APPEND | O_WRONLY,
-			      0666)) == -1)
-    return (my_error("Error: Open failed\n"));
-  free(trace);
-  return (EXIT_SUCCESS);
-}
 
 int	init(t_data *d, char *ex)
 {
@@ -93,11 +64,6 @@ void	loop_test(t_data *d, int fd)
       usleep(500000);
       free(str);
     }
-}
-
-void		kill_your_self(int pid)
-{
-  kill(pid, SIGTERM);
 }
 
 int		all_test(char *ex, char **env, char *test)
