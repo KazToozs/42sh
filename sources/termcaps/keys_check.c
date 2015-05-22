@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 03:57:33 2015 Quentin Fernandez
-** Last update Wed May 20 21:00:38 2015 Quentin Fernandez
+** Last update Fri May 22 18:56:46 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -38,10 +38,10 @@ int		is_cmd_key(unsigned char *keys)
   return (0);
 }
 
-int		key_check(t_arg *arg, char *keys)
+int			key_check(t_arg *arg, char *keys)
 {
-  long		key;
-  int		i;
+  long			key;
+  int			i;
   struct winsize	w;
 
   key = (*(long *)keys);

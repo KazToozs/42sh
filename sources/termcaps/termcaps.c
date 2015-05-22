@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 17:52:29 2015 Quentin Fernandez
-** Last update Wed May 20 21:00:47 2015 Quentin Fernandez
+** Last update Fri May 22 19:48:12 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -20,7 +20,7 @@ void			check_term()
     col = w.ws_col;
   if (col != w.ws_col)
     {
-      clear_l_screen(&glo.arg);
+      clear_l_screen(&g_glo.arg);
       col = w.ws_col;
     }
 }
@@ -32,7 +32,7 @@ int			init_term()
 
   if (!isatty(2))
     return (-1);
-  n_term = env_var_val(glo.env, "TERM", 0);
+  n_term = env_var_val(g_glo.env, "TERM", 0);
   n_term = (n_term) ? n_term : "xterm";
   if (tgetent(NULL, n_term) == -1)
     return (-1);
@@ -54,7 +54,7 @@ int			reset_term()
 
   if (!isatty(2))
     return (-1);
-  n_term = env_var_val(glo.env, "TERM", 0);
+  n_term = env_var_val(g_glo.env, "TERM", 0);
   n_term = (n_term) ? n_term : "xterm";
   if (tgetent(NULL, n_term) == -1)
     return (-1);

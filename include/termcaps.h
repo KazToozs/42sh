@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:22:10 2015 Quentin Fernandez
-** Last update Wed May 20 21:00:10 2015 Quentin Fernandez
+** Last update Fri May 22 19:46:42 2015 cristopher toozs-hobson
 */
 
 #ifndef _TERMCAPS_H_
@@ -76,17 +76,16 @@ struct		s_key
   t_func_k	func;
 };
 
-typedef struct  s_glo
+typedef struct	s_glo
 {
-  struct s_env  *env;
+  struct s_env	*env;
   t_arg		arg;
-  pid_t         pid;
-  pid_t         gpid;
-  int           x;
-  char          *prompt;
-}               g_glo;
+  pid_t		pid;
+  int		x;
+  char		*prompt;
+}               t_glo;
 
-extern g_glo	glo;
+extern t_glo	g_glo;
 
 /*
 ** Prototypes

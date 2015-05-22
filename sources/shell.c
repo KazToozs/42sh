@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  1 11:50:46 2015 cristopher toozs-hobson
-** Last update Thu May 21 18:28:00 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:45:01 2015 cristopher toozs-hobson
 */
 
 #include "minishell.h"
@@ -38,10 +38,9 @@ int		interpret_command(char *ret, t_main *m)
     {
       if (make_tree(&m->tree, ret) == 1)
 	return (1);
-      show_tree(m->tree, 0);
       check = launch_tree(m->tree, m);
-      if (glo.pid != 0)
-	glo.pid = -1;
+      if (g_glo.pid != 0)
+	g_glo.pid = -1;
       free_tree(m->tree);
       return (check);
     }
@@ -54,16 +53,16 @@ int		my_shell(char *ret, t_main *m)
 
   if (check_quotes(ret) == 0)
     {
-      glo.pid = -1;
+      g_glo.pid = -1;
       check = interpret_command(ret, m);
-      if (glo.pid == 0)
+      if (check == -3)
+        return (m->ret);
+      if (g_glo.pid == 0)
         {
           return (check);
         }
-      if (glo.pid == -1 && check == -3)
-        return (m->ret);
       m->ret = check;
-      glo.pid = -2;
+      g_glo.pid = -2;
     }
   else
     {

@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Fri May  8 14:02:15 2015 cristopher toozs-hobson
-** Last update Sun May 17 10:37:46 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:45:33 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -51,8 +51,8 @@ int		double_left_fork(t_tree *root, t_main *m)
     return (1);
   else if (pid == 0)
     {
-      glo.pid = 0;
-      glo.x = 2;
+      g_glo.pid = 0;
+      g_glo.x = 2;
       if ((ret = double_left(root, m)) == 1)
         {
           return (ret);

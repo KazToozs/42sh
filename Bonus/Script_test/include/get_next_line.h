@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sun Nov 16 15:17:52 2014 cristopher toozs-hobson
-** Last update Sun Feb 22 20:35:59 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:26:16 2015 cristopher toozs-hobson
 */
 
 #ifndef G_N_L_H_
@@ -18,4 +18,4 @@
 char	*get_next_line(const int fd);
 char	*my_realloc(char *str, int size);
 
-#endif
+#endif /* G_N_L_H_ */

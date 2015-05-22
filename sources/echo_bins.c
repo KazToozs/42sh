@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Tue Mar  3 14:08:22 2015 cristopher toozs-hobson
-** Last update Mon May 18 14:32:52 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:39:25 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -31,7 +31,7 @@ void		dollar_echo(int i, int *n, t_main *m)
       my_put_nbr(m->ret);
       (*n) = (*n) + 1;
     }
-  else if ((ret = find_var(glo.env, m->word_tab[i] + (*n) + 1))
+  else if ((ret = find_var(g_glo.env, m->word_tab[i] + (*n) + 1))
 	   != NULL)
     {
       my_putstr(ret + my_echolen(m->word_tab[i] + (*n) + 1) + 1);
@@ -73,7 +73,7 @@ int		echo_check_chains(t_main *m)
 	  {
 	    if (m->word_tab[i][n + 1] == '?')
 	      n++;
-	    else if (find_var(glo.env, m->word_tab[i] + n + 1) == NULL)
+	    else if (find_var(g_glo.env, m->word_tab[i] + n + 1) == NULL)
 	      {
 		my_putstr_err(m->word_tab[i] + n + 1);
 		my_putstr_err(": Undefined variable\n");

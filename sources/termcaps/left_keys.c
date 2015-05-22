@@ -5,12 +5,12 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 04:44:03 2015 Quentin Fernandez
-** Last update Mon May 18 14:15:35 2015 cristopher toozs-hobson
+** Last update Fri May 22 18:57:45 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
 
-int             del_left(t_arg *arg)
+int		del_left(t_arg *arg)
 {
   if (arg->str->prev)
     {
@@ -27,7 +27,7 @@ int             del_left(t_arg *arg)
   return (0);
 }
 
-int             go_left(t_arg *arg)
+int		go_left(t_arg *arg)
 {
   if (arg->str && arg->str->prev)
     {
@@ -38,9 +38,9 @@ int             go_left(t_arg *arg)
   return (0);
 }
 
-void                    get_back(t_arg *arg)
+void			get_back(t_arg *arg)
 {
-  struct winsize        w;
+  struct winsize	w;
 
   ioctl(0, TIOCGWINSZ, &w);
   if (((arg->pos + 1) % w.ws_col) == 0)
@@ -49,7 +49,7 @@ void                    get_back(t_arg *arg)
     tputs(tgetstr("le", NULL), 0, put_c);
 }
 
-void                    get_up(int l)
+void			get_up(int l)
 {
   tputs(tgetstr("up", NULL), 1, put_c);
   while (l--)

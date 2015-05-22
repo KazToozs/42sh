@@ -5,13 +5,28 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb 18 16:03:39 2015 cristopher toozs-hobson
-** Last update Thu May 21 17:01:58 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:41:17 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
 #include "my.h"
 #include "minishell.h"
-#include "builtins.h"
+
+t_bins		bin[] =
+  {
+    {&escape, "exit"},
+    {&cd, "cd"},
+    {&cd, "cd.."},
+    {&cd, ".."},
+    {&remove_env_var, "unsetenv"},
+    {&my_setenv, "setenv"},
+    {&display_env, "env"},
+    {&my_echo, "echo"},
+    {&built_source, "source"},
+    {&built_alias, "alias"},
+    {&built_export, "export"},
+    {NULL, NULL}
+  };
 
 char		**add_slash(char **tab)
 {
@@ -48,15 +63,15 @@ int		execute(char *path, int i, t_main *m)
   char		*save;
   int		check;
 
-  if ((my_strcmp(m->word_tab[0], g_bin[i].str)) == 0)
+  if ((my_strcmp(m->word_tab[0], bin[i].str)) == 0)
     {
-      check = g_bin[i].ptr(m);
+      check = bin[i].ptr(m);
       return (check);
     }
   else if ((save = find_function(path, m->word_tab[0])))
     {
       m->word_tab[0] = save;
-      check = execute_fork(m->word_tab, glo.env, m);
+      check = execute_fork(m->word_tab, g_glo.env, m);
       return (check);
     }
   else if (m->word_tab && m->word_tab[0])
@@ -81,9 +96,9 @@ int		execute_function(char *ret, t_main *m)
       if ((ret = alias(ret, m->file)) == NULL)
 	return (1);
       m->word_tab = my_str_tab(ret);
-      path = find_var(glo.env, "PATH");
-      while (ret[0] != '\0' && g_bin[i].str != NULL
-	     && (my_strcmp(m->word_tab[0], g_bin[i].str) != 0))
+      path = find_var(g_glo.env, "PATH");
+      while (ret[0] != '\0' && bin[i].str != NULL
+	     && (my_strcmp(m->word_tab[0], bin[i].str) != 0))
 	i++;
       if ((m->word_tab = globbing(m->word_tab)) == NULL)
 	{

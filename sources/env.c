@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Feb 16 11:32:54 2015 cristopher toozs-hobson
-** Last update Sun May 17 10:22:50 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:37:15 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -102,10 +102,10 @@ int		make_env(char **env)
   int		i;
 
   i = 0;
-  glo.env = NULL;
+  g_glo.env = NULL;
   while (env[i] != NULL)
     {
-      if (my_put_in_list_end(&glo.env, env[i], &glo.env) == 1)
+      if (my_put_in_list_end(&g_glo.env, env[i], &g_glo.env) == 1)
 	return (1);
       i++;
     }

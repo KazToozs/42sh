@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 16:32:50 2015 cristopher toozs-hobson
-** Last update Wed May 20 16:54:56 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:36:22 2015 cristopher toozs-hobson
 */
 
 #ifndef _SHELL_H_
@@ -70,6 +70,12 @@ typedef struct	s_main
   struct s_file	*file;
 }		t_main;
 
+typedef struct	s_bins
+{
+  int		(*ptr)(t_main *m);
+  char		*str;
+}		t_bins;
+
 typedef struct	s_exec
 {
   int		(*ptr)(t_tree *root, t_main *m);
@@ -95,14 +101,12 @@ typedef struct	s_glo
   struct s_env	*env;
   t_arg		arg;
   pid_t		pid;
-  pid_t		gpid;
   int		x;
   char		*prompt;
-}		g_glo;
+}		t_glo;
 
-extern g_glo	glo;
+extern t_glo	g_glo;
 
-void		show_tree(t_tree *tree, int nb);
 char		*get_cmd_str();
 int		init_arg();
 void		display_prompt(int fd);

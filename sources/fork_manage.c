@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Mon Feb 16 11:41:25 2015 cristopher toozs-hobson
-** Last update Thu May 14 11:43:04 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:40:22 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -33,7 +33,7 @@ char		**create_env(t_env *env)
   char		**tab;
 
   i = 0;
-  tab = malloc(sizeof(char *) * (chain_count(glo.env) + 1));
+  tab = malloc(sizeof(char *) * (chain_count(g_glo.env) + 1));
   if (tab == NULL)
     return (NULL);
   while (env != NULL)
@@ -73,7 +73,7 @@ int		execute_fork(char **word_tab, t_env *env, t_main *m)
     }
   else if (pid == 0)
     {
-      glo.pid = 0;
+      g_glo.pid = 0;
       fork_child(word_tab, env);
       return (1);
     }

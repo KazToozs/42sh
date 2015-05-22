@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 10 20:42:48 2015 Quentin Fernandez
-** Last update Thu May 21 10:35:15 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:47:52 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -50,24 +50,24 @@ int		check_enter(long c)
 	return (0);
       i += 8;
     }
- return (1);
+  return (1);
 }
 
 int		init_arg()
 {
-  if (glo.arg.str)
-    glo.arg.str = free_all_list(glo.arg.str);
-  if (glo.prompt)
+  if (g_glo.arg.str)
+    g_glo.arg.str = free_all_list(g_glo.arg.str);
+  if (g_glo.prompt)
     {
-      glo.arg.size = strlen(glo.prompt);
-      glo.arg.pos = strlen(glo.prompt);
+      g_glo.arg.size = strlen(g_glo.prompt);
+      g_glo.arg.pos = strlen(g_glo.prompt);
     }
   else
     {
-      glo.arg.pos = 0;
-      glo.arg.size = 0;
+      g_glo.arg.pos = 0;
+      g_glo.arg.size = 0;
     }
-  if (!(glo.arg.str = add_elem_to_list(glo.arg.str, NULL)))
+  if (!(g_glo.arg.str = add_elem_to_list(g_glo.arg.str, NULL)))
     return (-1);
   return (0);
 }
@@ -94,17 +94,17 @@ char		*get_cmd_str()
     return (NULL);
   while (check_enter((keys = get_keys())))
     {
-      if (key_check(&glo.arg, (char *)&keys))
+      if (key_check(&g_glo.arg, (char *)&keys))
 	{
 	  reset_term();
 	  return (NULL);
 	}
     }
-  go_to_end(&glo.arg);
+  go_to_end(&g_glo.arg);
   fprintf(stderr, "\n");
   if (reset_term())
     return (NULL);
-  ret = arg_to_str(glo.arg.str);
-  glo.arg.str = free_all_list(glo.arg.str);
+  ret = arg_to_str(g_glo.arg.str);
+  g_glo.arg.str = free_all_list(g_glo.arg.str);
   return (ret);
 }

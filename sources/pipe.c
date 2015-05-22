@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Feb 28 18:30:03 2015 cristopher toozs-hobson
-** Last update Wed May  6 16:07:40 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:41:36 2015 cristopher toozs-hobson
 */
 
 #include <unistd.h>
@@ -61,7 +61,7 @@ int		father(int *pipefd, t_tree *root, pid_t pid, t_main *m)
 
 int		child(int *pipefd, t_tree *root, t_main *m)
 {
-  glo.pid = 0;
+  g_glo.pid = 0;
   if (close(pipefd[READ_END]) == -1)
     return (1);
   if (dup2(pipefd[WRITE_END], WRITE_END) == -1)

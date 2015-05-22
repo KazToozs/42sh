@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Mar 25 17:45:50 2015 cristopher toozs-hobson
-** Last update Thu May 21 15:19:18 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:39:49 2015 cristopher toozs-hobson
 */
 
 #include	<stdlib.h>
@@ -19,17 +19,17 @@ int		cd_home(t_main *m)
 
   if (!m->word_tab[1] || my_strcmp(m->word_tab[1], "~") == 0)
     {
-      if ((ret = env_var_val(glo.env , "HOME", 1)) == NULL)
+      if ((ret = env_var_val(g_glo.env , "HOME", 1)) == NULL)
 	return (1);
       if ((my_chdir(ret)) == -1)
 	{
 	  free(ret);
 	  return (1);
 	}
-      ret = env_var_val(glo.env, "PWD", 1);
+      ret = env_var_val(g_glo.env, "PWD", 1);
       if (ret != NULL)
 	add_env("OLDPWD", ret);
-      if ((ret = env_var_val(glo.env, "HOME", 1)) == NULL)
+      if ((ret = env_var_val(g_glo.env, "HOME", 1)) == NULL)
 	return (1);
       add_env("PWD", ret);
       return (0);
@@ -49,7 +49,7 @@ int		cd_ddot(t_main *m)
     {
       if ((my_chdir("..")) == -1)
         return (1);
-      if ((old_pwd = env_var_val(glo.env, "PWD", 1)) == NULL)
+      if ((old_pwd = env_var_val(g_glo.env, "PWD", 1)) == NULL)
 	return (1);
       add_env("OLDPWD", old_pwd);
       i = my_strlen(old_pwd);
@@ -76,7 +76,7 @@ int		cd_minus(t_main *m)
     return (1);
   if (my_strcmp(m->word_tab[1], "-") == 0)
     {
-      if ((ret = env_var_val(glo.env, "OLDPWD", 1)) == NULL)
+      if ((ret = env_var_val(g_glo.env, "OLDPWD", 1)) == NULL)
 	return (1);
       if (my_chdir(ret) == -1)
         {
@@ -100,7 +100,7 @@ int		cd_tilde(t_main *m)
 
   if (m->word_tab[1][0] == '~' && m->word_tab[1][1] == '/')
     {
-      if ((ret = env_var_val(glo.env, "HOME", 1)) == NULL)
+      if ((ret = env_var_val(g_glo.env, "HOME", 1)) == NULL)
 	return (1);
       home = my_strcat(ret, "/", 0);
       free(ret);
@@ -109,7 +109,7 @@ int		cd_tilde(t_main *m)
 	  free(home);
 	  return (1);
 	}
-      if ((ret = env_var_val(glo.env, "PWD", 1)) == NULL)
+      if ((ret = env_var_val(g_glo.env, "PWD", 1)) == NULL)
 	return (1);
       new_pwd = NULL;
       if ((new_pwd = getcwd(new_pwd, PATH_MAX)) == NULL)

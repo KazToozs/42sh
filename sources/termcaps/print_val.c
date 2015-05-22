@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 04:19:35 2015 Quentin Fernandez
-** Last update Wed May 20 11:54:11 2015 cristopher toozs-hobson
+** Last update Fri May 22 18:58:48 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -20,7 +20,7 @@ int		put_str(char *str)
   return (write(0, str, strlen(str)));
 }
 
-void            print_list(t_arg *arg, t_str *str)
+void		print_list(t_arg *arg, t_str *str)
 {
   (void)arg;
   if (str->val)
@@ -35,7 +35,7 @@ void            print_list(t_arg *arg, t_str *str)
   load_pos();
 }
 
-void            print_list_del(t_arg *arg, t_str *str)
+void		print_list_del(t_arg *arg, t_str *str)
 {
   (void)arg;
   while (str->next)

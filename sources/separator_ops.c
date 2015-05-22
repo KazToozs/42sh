@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Sat Apr 25 16:12:02 2015 cristopher toozs-hobson
-** Last update Thu May 21 11:39:49 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:41:58 2015 cristopher toozs-hobson
 */
 
 #include <sys/types.h>
@@ -15,7 +15,7 @@
 
 int		sep_fork()
 {
-  if ((glo.pid = fork()) == - 1)
+  if ((g_glo.pid = fork()) == - 1)
     {
       my_putstr_err("Fork failed\n");
       return (1);
@@ -31,7 +31,7 @@ int		semi_colon(t_tree *root, t_main *m)
     {
       ret = launch_tree(root->left, m);
     }
-  if (root->right && glo.pid == -1)
+  if (root->right && g_glo.pid == -1)
     {
       ret = launch_tree(root->right, m);
       return (ret);
@@ -45,7 +45,7 @@ int		and_op(t_tree *root, t_main *m)
 
   if (root->left)
     ret = launch_tree(root->left, m);
-  if (root->right && ret == 0 && glo.pid == -1)
+  if (root->right && ret == 0 && g_glo.pid == -1)
     {
       if ((ret = launch_tree(root->right, m)) != 0)
         return (ret);

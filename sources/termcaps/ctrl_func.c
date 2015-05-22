@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Wed May 20 20:18:36 2015 Quentin Fernandez
-** Last update Wed May 20 21:09:28 2015 Quentin Fernandez
+** Last update Fri May 22 19:48:37 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
@@ -18,9 +18,9 @@ int		clear_l_screen(t_arg *arg)
   while (arg->str->prev)
     arg->str = arg->str->prev;
   put_str(tgetstr("cl", NULL));
-  display_prompt(1, glo.env);
+  display_prompt(1, g_glo.env);
   old_pos = arg->pos;
-  arg->pos = strlen(glo.prompt);
+  arg->pos = strlen(g_glo.prompt);
   i = arg->pos;
   print_list(arg, arg->str);
   while (i++ < old_pos)

@@ -5,21 +5,21 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sun May 17 04:45:36 2015 Quentin Fernandez
-** Last update Sun May 17 04:45:55 2015 Quentin Fernandez
+** Last update Fri May 22 18:59:13 2015 cristopher toozs-hobson
 */
 
 #include "termcaps.h"
 
-void                    get_down(int l)
+void			get_down(int l)
 {
   tputs(tgetstr("do", NULL), 1, put_c);
   while (l--)
     tputs(tgetstr("le", NULL), 1, put_c);
 }
 
-int                     go_right(t_arg *arg)
+int			go_right(t_arg *arg)
 {
-  struct winsize        w;
+  struct winsize	w;
 
   if (arg->str && arg->str->next)
     {

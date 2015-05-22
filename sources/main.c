@@ -5,7 +5,7 @@
 ** Login   <toozs-_c@epitech.net>
 ** 
 ** Started on  Wed Feb  4 15:15:44 2015 cristopher toozs-hobson
-** Last update Thu May 21 18:27:34 2015 cristopher toozs-hobson
+** Last update Fri May 22 19:46:00 2015 cristopher toozs-hobson
 */
 
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "my.h"
 #include "minishell.h"
 
-g_glo		glo;
+t_glo		g_glo;
 extern char	**environ;
 
 char		*put_pwd(char *pwd)
@@ -42,32 +42,31 @@ void		display_prompt(int fd)
   char		*pwd;
 
   pwd = NULL;
-  glo.prompt = NULL;
+  g_glo.prompt = NULL;
   if ((pwd = getcwd(pwd, PATH_MAX)) != NULL)
     {
       pwd = put_pwd(pwd);
       pwd = my_strcat("42sh[", pwd, 2);
       pwd = my_strcat(pwd, "]$> ", 1);
-      glo.prompt = my_strdup(pwd);
+      g_glo.prompt = my_strdup(pwd);
     }
-  if (glo.prompt)
+  if (g_glo.prompt)
     {
       my_putstr("\e[96m");
       if (fd == 1)
-	my_putstr(glo.prompt);
+	my_putstr(g_glo.prompt);
       if (fd == 2)
-	my_putstr_err(glo.prompt);
+	my_putstr_err(g_glo.prompt);
       my_putstr("\e[39m");
     }
   else
-    glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
+    g_glo.prompt = my_strdup("42sh[<Missing PWD>]$> ");
 }
-
 
 int		start_up(t_main *m)
 {
-  glo.x = 1;
-  glo.pid = -2;
+  g_glo.x = 1;
+  g_glo.pid = -2;
   m->ret = 0;
   m->file = NULL;
   if (make_env(environ) == 1)
@@ -106,7 +105,7 @@ int		main()
       if ((check = my_shell(ret, &m)) != -4)
 	{
 	  free(ret);
-	  free_env(glo.env);
+	  free_env(g_glo.env);
 	  return (check);
 	}
       display_prompt(1);
