@@ -5,7 +5,7 @@
 ** Login   <fernan_s@epitech.net>
 ** 
 ** Started on  Sat May  9 23:22:10 2015 Quentin Fernandez
-** Last update Fri May 22 19:46:42 2015 cristopher toozs-hobson
+** Last update Sat May 23 00:15:05 2015 cristopher toozs-hobson
 */
 
 #ifndef _TERMCAPS_H_
@@ -161,14 +161,12 @@ void	get_up(int);
 void	get_down(int);
 int	go_right(t_arg *);
 
-
 /*
 ** keys_check.c
 */
 
 int		is_cmd_key(unsigned char *);
 int		key_check(t_arg *, char *);
-
 
 /*
 ** get_com_args.c
